@@ -16,7 +16,7 @@ return [
     //TAMPLATES
     'templateMaster' => 'templates.templateMaster',
 
-    'templateMasterContent' => 'content',
+    'templateMasterContent' => 'contentMaster',
 
     'templateMasterContentTitulo' => 'titulo-page' ,
 
