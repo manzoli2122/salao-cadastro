@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::group(['prefix' => 'cadastro', 'middleware' => 'auth' ], function(){
 
-        Route::get('operadoras/apagados/{id}', 'OperadoraController@showApagado')->name('operadoras.showapagado')        
+        Route::get('operadoras/apagados/{id}', 'OperadoraController@showApagado')->name('operadoras.showapagado');     
         Route::get('operadoras/apagados', 'OperadoraController@indexApagados')->name('operadoras.apagados');
         Route::get('operadoras/pesquisarApagados', 'OperadoraController@pesquisarApagados')->name('operadoras.pesquisarApagados');
         Route::get('operadoras/pesquisar', 'OperadoraController@pesquisar')->name('operadoras.pesquisar');
