@@ -20,7 +20,7 @@
     "autoload": {
         
         "psr-4": {
-            "Manzoli2122\\Salao\\Cadastro": "src/Cadastro/"
+            "Manzoli2122\\Salao\\Cadastro\\": "src/Cadastro/"
         }
     },
     "extra":{
