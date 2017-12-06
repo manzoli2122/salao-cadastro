@@ -3,6 +3,7 @@
 namespace Manzoli2122\Salao\Cadastro\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 class Servico extends Model
 {
