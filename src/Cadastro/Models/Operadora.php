@@ -10,8 +10,10 @@ class Operadora extends Model
 {
     use SoftDeletes;
 
-    protected $table = Config::get('cadastro.operadoras_table' , 'operadoras') ;
-    
+    public function __construct(){
+        $this->table = Config::get('cadastro.operadoras_table' , 'operadoras') ;    
+    }
+
     
     protected $fillable = [
         'nome', 'porcentagem_credito', 'porcentagem_credito_parcelado' , 'porcentagem_debito', 'ativo' ,

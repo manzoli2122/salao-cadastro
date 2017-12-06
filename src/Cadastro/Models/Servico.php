@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Servico extends Model
 {
     
-    protected $table = Config::get('cadastro.servicos_table' , 'servicos') ;
     
-    
+    public function __construct(){
+        $this->table = Config::get('cadastro.servicos_table' , 'servicos') ;    
+    }
+
     protected $fillable = [
             'nome', 'valor', 'porcentagem_funcionario', 'ativo' , 'categoria' , 'custo_com_produto' ,
             'desconto_maximo' ,  'desconto_promocional' , 'duracao_aproximada' , 'observacoes' , 
