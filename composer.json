@@ -20,13 +20,15 @@
     "autoload": {
         
         "psr-4": {
-            "Manzoli2122\\Salao\\Cadastro\\": "src/Cadastro/"
+            "Manzoli2122\\Salao\\Cadastro\\": "src/Cadastro/",
+            "Manzoli2122\\Salao\\Atendimento\\": "src/Atendimento/"
         }
     },
     "extra":{
         "laravel":{
             "providers":[
-                "Manzoli2122\\Salao\\Cadastro\\CadastroServiceProvider"
+                "Manzoli2122\\Salao\\Cadastro\\CadastroServiceProvider",
+                "Manzoli2122\\Salao\\Atendimento\\AtendimentoServiceProvider"
             ]
             
         }
