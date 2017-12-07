@@ -10,9 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/console": "~5.0",
-        "illuminate/support": "~5.0",       
+        "php": ">=7.0.0",              
         "laravelcollective/html": "^5.4.0",
         "manzoli2122/all": "v1.2.1"
     },
@@ -20,15 +18,13 @@
     "autoload": {
         
         "psr-4": {
-            "Manzoli2122\\Salao\\Cadastro\\": "src/Cadastro/",
-            "Manzoli2122\\Salao\\Atendimento\\": "src/Atendimento/"
+            "Manzoli2122\\Salao\\Cadastro\\": "src/Cadastro/"
         }
     },
     "extra":{
         "laravel":{
             "providers":[
-                "Manzoli2122\\Salao\\Cadastro\\CadastroServiceProvider",
-                "Manzoli2122\\Salao\\Atendimento\\AtendimentoServiceProvider"
+                "Manzoli2122\\Salao\\Cadastro\\CadastroServiceProvider"
             ]
             
         }
