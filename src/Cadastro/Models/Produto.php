@@ -7,10 +7,19 @@ use Illuminate\Support\Facades\Config;
 
 class Produto extends Model
 {
-    
-    public function __construct(){
-        $this->table = Config::get('cadastro.produtos_table' , 'produtos');    
-    }    
+    public function newInstance($attributes = [], $exists = false)
+    {
+        $model = parent::newInstance($attributes, $exists);    
+        $model->setTable($this->getTable());    
+        return $model;
+    }
+
+    public function getTable()
+    {
+        return  Config::get('cadastro.produtos_table' , 'produtos');
+    }
+
+     
     protected $fillable = [
             'nome', 'valor', 'descricao', 'ativo' , 'observacoes' , 'desconto_maximo' , 'desconto_promocional' , 
     ];

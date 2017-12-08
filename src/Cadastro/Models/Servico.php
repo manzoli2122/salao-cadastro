@@ -7,11 +7,19 @@ use Illuminate\Support\Facades\Config;
 
 class Servico extends Model
 {
-    
-    
-    public function __construct(){
-        $this->table = Config::get('cadastro.servicos_table' , 'servicos') ;    
+    public function newInstance($attributes = [], $exists = false)
+    {
+        $model = parent::newInstance($attributes, $exists);    
+        $model->setTable($this->getTable());    
+        return $model;
     }
+
+    public function getTable()
+    {
+        return  Config::get('cadastro.servicos_table' , 'servicos') ;
+    }
+
+    
 
     protected $fillable = [
             'nome', 'valor', 'porcentagem_funcionario', 'ativo' , 'categoria' , 'custo_com_produto' ,

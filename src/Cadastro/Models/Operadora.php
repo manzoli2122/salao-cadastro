@@ -10,9 +10,18 @@ class Operadora extends Model
 {
     use SoftDeletes;
 
-    public function __construct(){
-        $this->table = Config::get('cadastro.operadoras_table' , 'operadoras') ;    
+    public function newInstance($attributes = [], $exists = false)
+    {
+        $model = parent::newInstance($attributes, $exists);    
+        $model->setTable($this->getTable());    
+        return $model;
     }
+
+    public function getTable()
+    {
+        return  Config::get('cadastro.operadoras_table' , 'operadoras');
+    }
+
 
     
     protected $fillable = [
