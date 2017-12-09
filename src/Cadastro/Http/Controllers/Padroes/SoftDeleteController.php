@@ -1,16 +1,10 @@
 <?php
 namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-class SoftDeleteController extends BaseController
+class SoftDeleteController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     protected $totalPage = 10;
 
     protected $upload = false;
