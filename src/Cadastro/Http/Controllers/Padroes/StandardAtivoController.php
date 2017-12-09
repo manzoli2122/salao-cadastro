@@ -1,5 +1,5 @@
 <?php
-namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
+namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

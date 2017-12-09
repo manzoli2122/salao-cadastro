@@ -3,19 +3,19 @@ use Illuminate\Support\Facades\Route;
 
     Route::group(['prefix' => 'cadastro', 'middleware' => 'auth' ], function(){
 
+
+        // OPERADORAS
         Route::get('operadoras/apagados/{id}', 'OperadoraController@showApagado')->name('operadoras.showapagado');     
         Route::get('operadoras/apagados', 'OperadoraController@indexApagados')->name('operadoras.apagados');
         Route::get('operadoras/pesquisarApagados', 'OperadoraController@pesquisarApagados')->name('operadoras.pesquisarApagados');
         Route::get('operadoras/pesquisar', 'OperadoraController@pesquisar')->name('operadoras.pesquisar');
         Route::delete('operadoras/destroySoft/{id}', 'OperadoraController@destroySoft')->name('operadoras.destroySoft');
         Route::get('operadoras/restore/{id}', 'OperadoraController@restore')->name('operadoras.restore');
-
-
         Route::resource('operadoras', 'OperadoraController'); 
 
 
 
-
+        // SERVIÇOS
         Route::get('servicos/apagados/{id}', 'ServicoController@showApagado')->name('servicos.showapagado');        
         Route::get('servicos/apagados', 'ServicoController@indexApagados')->name('servicos.apagados');
         Route::get('servicos/pesquisarApagados', 'ServicoController@pesquisarApagados')->name('servicos.pesquisarApagados');
@@ -26,10 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
+        // PRODUTOS
         Route::get('produtos/apagados/{id}', 'ProdutoController@showApagado')->name('produtos.showapagado');        
         Route::get('produtos/apagados', 'ProdutoController@indexApagados')->name('produtos.apagados');
         Route::get('produtos/pesquisarApagados', 'ProdutoController@pesquisarApagados')->name('produtos.pesquisarApagados');
@@ -39,6 +36,7 @@ use Illuminate\Support\Facades\Route;
         Route::resource('produtos', 'ProdutoController'); 
 
 
+        // MODULO CADASTRO
         Route::get('/', 'CadastroController@index')->name('cadastro');
 
     });

@@ -3,6 +3,7 @@
 namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
 
 use Manzoli2122\Salao\Cadastro\Models\Operadora;
+use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\SoftDeleteController ;
 
 class OperadoraController extends SoftDeleteController
 {

@@ -3,6 +3,7 @@
 namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
 
 use Manzoli2122\Salao\Cadastro\Models\Produto;
+use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\StandardAtivoController ;
 
 class ProdutoController extends StandardAtivoController
 {
