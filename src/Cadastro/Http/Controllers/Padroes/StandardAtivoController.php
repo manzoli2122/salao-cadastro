@@ -8,7 +8,6 @@ class StandardAtivoController extends Controller
 {
     
     protected $totalPage = 10;
-
     protected $upload = false;
 
 
@@ -21,19 +20,30 @@ class StandardAtivoController extends Controller
         return view("{$this->view}.index", compact('models', 'apagados'));
     }
 
+    public function indexApagados()
+    {
+        $apagados = true;
+        $models = $this->model->inativo()->paginate($this->totalPage);
+        return view("{$this->view}.index", compact('models', 'apagados'));
+    }
+
+
 
     
     public function pesquisar(Request $request)
     {        
-        $apagados = false;
+        $apagados = false; 
         $dataForm = $request->except('_token');
-        if(isset($dataForm['key'])){
-            $models = $this->model->ativo()->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage); 
+        if(!isset($dataForm['key'])){
+            return redirect()->route("{$this->route}.index");           
         }
-        else{
-            return redirect()->route("{$this->route}.index");            
-        }            
-        return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados' ));
+            $models = $this->model->ativo()->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage); 
+        return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados'));
+
+        
+        
+        
+      
     }
 
 
@@ -50,12 +60,7 @@ class StandardAtivoController extends Controller
     }
 
     
-    public function indexApagados()
-    {
-        $apagados = true;
-        $models = $this->model->inativo()->paginate($this->totalPage);
-        return view("{$this->view}.index", compact('models', 'apagados'));
-    }
+    
 
 
 

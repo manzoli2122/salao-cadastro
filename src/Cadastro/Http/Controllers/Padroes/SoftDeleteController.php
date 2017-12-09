@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 class SoftDeleteController extends Controller
 {
     protected $totalPage = 10;
-
     protected $upload = false;
 
 
@@ -145,12 +144,10 @@ class SoftDeleteController extends Controller
     {      
         $apagados = false; 
         $dataForm = $request->except('_token');
-        if(isset($dataForm['key'])){
-            $models = $this->model->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage); 
+        if(! isset($dataForm['key'])){
+            return redirect()->route("{$this->route}.index");             
         }
-        else{
-            return redirect()->route("{$this->route}.index");            
-        }         
+        $models = $this->model->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage);       
         return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados'));
     }
 
