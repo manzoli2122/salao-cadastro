@@ -39,10 +39,6 @@ class StandardAtivoController extends Controller
         }
             $models = $this->model->ativo()->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage); 
         return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados'));
-
-        
-        
-        
       
     }
 

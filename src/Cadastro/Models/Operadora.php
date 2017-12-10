@@ -40,7 +40,12 @@ class Operadora extends Model
         ];
     }
 
-    
+    public function index($totalPage)
+    {
+        return $this->orderBy('nome', 'asc')->paginate($totalPage);        
+    }
+
+   
 
     protected $dates = ['deleted_at'];
     
