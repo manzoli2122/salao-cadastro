@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.0.0",              
         "laravelcollective/html": "^5.4.0",
-        "manzoli2122/all": "1.5.0"
+        "manzoli2122/all": "dev-master"
     },
     
     "autoload": {
