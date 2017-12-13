@@ -1,7 +1,7 @@
 @extends( Config::get('app.templateMaster' , 'templates.templateMaster')  )
 
 @section( Config::get('app.templateMasterContentTitulo' , 'titulo-page')  )
-	Listagem dos Produtos			
+	Listagem dos Serviços			
 @endsection
 
 @section( Config::get('app.templateMasterContent' , 'content')  )
@@ -11,7 +11,7 @@
         <div class="box-header align-right">
 			@permissao('servicos-cadastrar')
 				<a href="{{ route('servicos.create')}}" class="btn btn-success" title="Adicionar um novo Serviço">
-					<i class="fa fa-plus"></i> Cadastrar Produto
+					<i class="fa fa-plus"></i> Cadastrar Serviço
 				</a>
 			@endpermissao            
         </div>
