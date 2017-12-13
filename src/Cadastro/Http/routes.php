@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('operadoras/pesquisar', 'OperadoraController@pesquisar')->name('operadoras.pesquisar');
         Route::delete('operadoras/destroySoft/{id}', 'OperadoraController@destroySoft')->name('operadoras.destroySoft');
         Route::get('operadoras/restore/{id}', 'OperadoraController@restore')->name('operadoras.restore');
+        
+        Route::post('operadoras/getDatatable', 'OperadoraController@getDatatable')->name('operadoras.getDatatable');        
         Route::resource('operadoras', 'OperadoraController'); 
 
 

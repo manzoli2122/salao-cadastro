@@ -4,6 +4,8 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
 
 use Manzoli2122\Salao\Cadastro\Models\Operadora;
 use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\SoftDeleteController ;
+use DataTables;
+
 
 class OperadoraController extends SoftDeleteController
 {
@@ -40,6 +42,25 @@ class OperadoraController extends SoftDeleteController
     }
 
 
+
+
+     /**
+    * Processa a requisição AJAX do DataTable na página de listagem.
+    * Mais informações em: http://datatables.yajrabox.com
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function getDatatable()
+    {
+        $models = Operadora::select(['id', 'nome', 'porcentagem_credito',  'porcentagem_credito_parcelado' ,
+                        'porcentagem_debito' , 'max_parcelas'   ]);
+        return Datatables::of($models)
+            ->addColumn('action', function($linha) {
+                return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
+                    . '<a href="'.action('OperadoraController@edit', $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
+                    . '<a href="'.action('OperadoraController@show', $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
+            })->make(true);
+    }
 
 
 }

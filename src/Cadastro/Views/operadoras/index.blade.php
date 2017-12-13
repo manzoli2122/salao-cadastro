@@ -1,76 +1,122 @@
-@extends( Config::get('cadastro.templateMaster' , 'templates.templateMaster')  )
+@extends( Config::get('app.templateMaster' , 'templates.templateMaster')  )
+
+@section( Config::get('cadastro.templateMasterContentTitulo' , 'titulo-page')  )
+	Listagem dos Operadoras			
+@endsection
+
+@section( Config::get('cadastro.templateMasterContent' , 'content')  )
+
+<div class="col-xs-12">
+    <div class="box box-primary">
+        <div class="box-header align-right">
+			@permissao('operadoras-cadastrar')
+				<a href="{{ route('operadoras.create')}}" class="btn btn-primary" title="Adicionar uma nova Operadora">
+					<i class="fa fa-plus"></i> Cadastrar Operadora
+				</a>
+			@endpermissao            
+        </div>
+
+        <div class="box-body">
+            <table class="table table-bordered table-striped table-hover" id="datatable">
+                <thead>
+                    <tr>
+						<th pesquisavel>ID</th>
+						<th pesquisavel>Nome</th>
+						<th>Porc. Credito</th>
+						<th>Porc. Credito Parc.</th>
+						<th>Porc. Debito</th>
+						<th>Máximo de Parcelas</th>					
+						
+                        <th class="align-center">Ações</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+
+@push(Config::get('cadastro.templateMasterScript' , 'script') )
+	<script src="{{ mix('js/datatables-padrao.js') }}" type="text/javascript"></script>
+
+	<script>
+		$(document).ready(function() {
+			var dataTable = datatablePadrao('#datatable', {
+				order: [[ 0, "asc" ]],
+				ajax: { 
+					url:'{{ route('operadoras.getDatatable') }}'
+				},
+				columns: [
+					{ data: 'id', name: 'id' },
+					{ data: 'descricao', name: 'descricao' },
+					{ data: 'descricao', name: 'descricao' },
+					{ data: 'descricao', name: 'descricao' },
+					{ data: 'descricao', name: 'descricao' },
+					{ data: 'descricao', name: 'descricao' },
+					{ data: 'descricao', name: 'descricao' },
+
+					{ data: 'action', name: 'action', orderable: false, searchable: false, class: 'align-center'}
+				],
+			});
+
+			dataTable.on('draw', function () {
+				$('[btn-excluir]').click(function (){
+					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('operadoras.index') }}", 
+						function(){
+							dataTable.row( $(this).parents('tr') ).remove().draw('page');
+						}
+					);
+				});
+			});
+		});
+	</script>
+@endpush
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @section( Config::get('cadastro.templateMasterMenuLateral' , 'menuLateral')  )
 			@if($apagados)
 				@permissao('operadoras')
 					<li><a href="{{ route('operadoras.index')}}"><i class="fa fa-circle-o text-blue"></i> <span>Operadoras Ativas</span></a></li>
 				@endpermissao
-			@else
-				@permissao('operadoras-cadastrar')
-					<li><a href="{{ route('operadoras.create')}}"><i class="fa fa-circle-o text-blue"></i> <span>Cadastrar Operadora</span></a></li>
-				@endpermissao
+			@else				
 				@permissao('operadoras-apagados')
 					<li><a href="{{  route('operadoras.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Operadoras Apagadas</span></a></li>
 				@endpermissao
 			@endif			
 @endsection
-		
-@section( Config::get('cadastro.templateMasterScript' , 'script')  )
-        	<script>$(function(){setTimeout("$('.hide-msg').fadeOut();",5000)});</script>
-			<script>
-            function ApagarModel(val) {
-                return  confirm('Deseja mesmo apagar?'  );                       
-            }
-		</script>
-@endsection
 
-@section( Config::get('cadastro.templateMasterCss' , 'css')  )					
-			<style type="text/css">
-					.btn-sm{
-						padding: 1px 10px;
-					}
-					.pagination{
-						margin:0px;
-						display: unset;
-						font-size:12px;
-					}
-			</style>
-@endsection
-
-
-@section( Config::get('cadastro.templateMasterContentTitulo' , 'titulo-page')  )
-			@if($apagados)
-				Listagem dos Operadoras Apagadas
-			@else
-				Listagem dos Operadoras
-			@endif						
-@endsection
 
 		
 
 	
-@section( Config::get('cadastro.templateMasterContent' , 'content')  )
-		
-			<section class="row Listagens">
-				<div class="col-12 col-sm-12 lista">		
-					@if(Session::has('success'))
-						<div class="alert alert-success hide-msg" style="float: left; width:100%; margin: 10px 0px;">
-						{{Session::get('success')}}
-						</div>
-					@endif
-				</div>
-			</section>
 
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
 						<div class="box-header">
 
-							@if(isset($dataForm))
-								{!! $models->appends($dataForm)->links() !!}
-							@else
-								{!! $models->links() !!}
-							@endif
+							
 
 
 							@if($apagados)
@@ -95,12 +141,7 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover table-striped">
 								<tr>
-									<th>Nome</th>
-									<th>Porc. Credito</th>
-									<th>Porc. Credito Parc.</th>
-									<th>Porc. Debito</th>
-									<th>Máximo de Parcelas</th>					
-									<th>Ações</th>
+									
 								</tr>
 								@forelse($models as $model)				
 									<tr>
