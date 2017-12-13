@@ -64,7 +64,7 @@
 
 			dataTable.on('draw', function () {
 				$('[btn-excluir]').click(function (){
-					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('servicos.index') }}", 
+					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('servicos.apagados') }}", 
 						function(){
 							dataTable.row( $(this).parents('tr') ).remove().draw('page');
 						}
