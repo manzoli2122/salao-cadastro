@@ -57,8 +57,8 @@ class OperadoraController extends SoftDeleteController
         return Datatables::of($models)
             ->addColumn('action', function($linha) {
                 return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
-                    . '<a href="'.action('OperadoraController@edit', $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
-                    . '<a href="'.action('OperadoraController@show', $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
+                    . '<a href="'.route('operadoras.edit', $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
+                    . '<a href="'.route('operadoras.show', $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
             })->make(true);
     }
 
