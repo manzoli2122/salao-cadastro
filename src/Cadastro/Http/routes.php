@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('produtos/apagados', 'ProdutoController@indexApagados')->name('produtos.apagados');
         Route::get('produtos/pesquisarApagados', 'ProdutoController@pesquisarApagados')->name('produtos.pesquisarApagados');
         Route::get('produtos/pesquisar', 'ProdutoController@pesquisar')->name('produtos.pesquisar');
-        Route::delete('produtos/destroySoft/{id}', 'ProdutoController@destroySoft')->name('produtos.destroySoft');
+        Route::delete('produtos/apagados/{id}', 'ProdutoController@destroySoft')->name('produtos.destroySoft');
         Route::get('produtos/restore/{id}', 'ProdutoController@restore')->name('produtos.restore');
         
         Route::post('produtos/getDatatable/apagados', 'ProdutoController@getDatatableApagados')->name('produtos.getDatatable.apagados');        
