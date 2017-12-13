@@ -40,6 +40,8 @@ use Illuminate\Support\Facades\Route;
         Route::delete('produtos/destroySoft/{id}', 'ProdutoController@destroySoft')->name('produtos.destroySoft');
         Route::get('produtos/restore/{id}', 'ProdutoController@restore')->name('produtos.restore');
         
+        Route::post('produtos/getDatatable/apagados', 'ProdutoController@getDatatableApagados')->name('produtos.getDatatable.apagados');        
+        
         Route::post('produtos/getDatatable', 'ProdutoController@getDatatable')->name('produtos.getDatatable');        
         Route::resource('produtos', 'ProdutoController'); 
 
