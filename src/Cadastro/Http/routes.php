@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('servicos/pesquisar', 'ServicoController@pesquisar')->name('servicos.pesquisar');
         Route::delete('servicos/destroySoft/{id}', 'ServicoController@destroySoft')->name('servicos.destroySoft');
         Route::get('servicos/restore/{id}', 'ServicoController@restore')->name('servicos.restore');
+        Route::post('servicos/getDatatable', 'ServicoController@getDatatable')->name('servicos.getDatatable');        
         Route::resource('servicos', 'ServicoController');
 
 
