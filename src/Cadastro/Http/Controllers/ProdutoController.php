@@ -68,6 +68,7 @@ class ProdutoController extends StandardAtivoController
     public function destroySoft($id)
     {
         try {
+            error_log($id);
             $model = $this->model->ativo()->find($id);
             $model->ativo = false ; 
             $delete = $model->save();           
