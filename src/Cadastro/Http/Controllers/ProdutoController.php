@@ -16,6 +16,7 @@ class ProdutoController extends StandardAtivoController
     protected $name = "Produto";
 
     protected $view = "cadastro::produtos";
+    protected $view_apagados = "cadastro::produtos.apagados";
 
     protected $route = "produtos";
 
@@ -86,6 +87,27 @@ class ProdutoController extends StandardAtivoController
             })->make(true);
     }
 
+
+
+
+
+    /**
+    * Processa a requisição AJAX do DataTable na página de listagem.
+    * Mais informações em: http://datatables.yajrabox.com
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function getDatatableApagados()
+    {
+        $models = Produto::onlyTrashed()->select(['id', 'nome', 'valor' ,
+                        'observacoes' , 'desconto_maximo'   ]);
+        return Datatables::of($models)
+            ->addColumn('action', function($linha) {
+                return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
+                    . '<a href="'.route('produtos.edit', $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
+                    . '<a href="'.route('produtos.show', $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
+            })->make(true);
+    }
 
    
 

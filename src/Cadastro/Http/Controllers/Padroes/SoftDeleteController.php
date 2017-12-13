@@ -22,7 +22,7 @@ class SoftDeleteController extends Controller
     {
         $apagados = true;
         $models = $this->model->onlyTrashed()->paginate($this->totalPage);
-        return view("{$this->view}.index", compact('models', 'apagados'));
+        return view("{$this->view_apagados}.index", compact('models', 'apagados'));
     }
 
 
