@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('operadoras/apagados', 'OperadoraController@indexApagados')->name('operadoras.apagados');
         Route::get('operadoras/pesquisarApagados', 'OperadoraController@pesquisarApagados')->name('operadoras.pesquisarApagados');
         Route::get('operadoras/pesquisar', 'OperadoraController@pesquisar')->name('operadoras.pesquisar');
-        Route::delete('operadoras/destroySoft/{id}', 'OperadoraController@destroySoft')->name('operadoras.destroySoft');
+        Route::delete('operadoras/apagados/{id}', 'OperadoraController@destroySoft')->name('operadoras.destroySoft');
         Route::get('operadoras/restore/{id}', 'OperadoraController@restore')->name('operadoras.restore');
         
         Route::post('operadoras/getDatatable/apagados', 'OperadoraController@getDatatableApagados')->name('operadoras.getDatatable.apagados');        
@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('servicos/apagados', 'ServicoController@indexApagados')->name('servicos.apagados');
         Route::get('servicos/pesquisarApagados', 'ServicoController@pesquisarApagados')->name('servicos.pesquisarApagados');
         Route::get('servicos/pesquisar', 'ServicoController@pesquisar')->name('servicos.pesquisar');
-        Route::delete('servicos/destroySoft/{id}', 'ServicoController@destroySoft')->name('servicos.destroySoft');
+        Route::delete('servicos/apagados/{id}', 'ServicoController@destroySoft')->name('servicos.destroySoft');
         Route::get('servicos/restore/{id}', 'ServicoController@restore')->name('servicos.restore');
        
         Route::post('servicos/getDatatable', 'ServicoController@getDatatable')->name('servicos.getDatatable');        

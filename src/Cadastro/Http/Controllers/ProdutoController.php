@@ -70,6 +70,7 @@ class ProdutoController extends StandardAtivoController
         try {
             error_log($id);
             $model = $this->model->ativo()->find($id);
+            error_log($model);
             $model->ativo = false ; 
             $delete = $model->save();           
         $msg = __('msg.sucesso_excluido', ['1' => 'Tipo de Seção']);
@@ -82,11 +83,6 @@ class ProdutoController extends StandardAtivoController
 
         return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
 
-
-
-        
-        
-        
     }
 
 

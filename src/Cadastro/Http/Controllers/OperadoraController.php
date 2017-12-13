@@ -64,6 +64,28 @@ class OperadoraController extends SoftDeleteController
 
 
 
+    public function destroySoft($id)
+    {
+        try {
+            error_log($id);
+            $model = $this->model->find($id);
+            $delete = $model->delete();
+
+            
+            
+                    
+        $msg = __('msg.sucesso_excluido', ['1' => 'Tipo de Seção']);
+        } catch(\Illuminate\Database\QueryException $e) {
+            $erro = true;
+            $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
+                __('msg.erro_exclusao_fk', ['1' => 'Tipo de Seção', '2' => 'Seção']):
+                __('msg.erro_bd');
+        }
+
+        return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
+
+    }
+
 
 
     
