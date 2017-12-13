@@ -9,7 +9,7 @@
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-md-12">
-    <div class="box box-primary">
+    <div class="box box-success">
 
         <form method="post" action="{{route('operadoras.update', $model->id)}}">
             
@@ -23,7 +23,7 @@
                     <i class="fa fa-reply"></i> Cancelar
                 </a>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-success">
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>

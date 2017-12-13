@@ -44,6 +44,31 @@ class OperadoraController extends SoftDeleteController
 
 
 
+
+
+    
+    public function create()
+    {
+        return view("{$this->view}.create");
+    }
+
+
+    
+    public function edit($id)
+    {
+        $model = $this->model->find($id);
+        return view("{$this->view}.edit", compact('model'));
+    }
+
+
+
+
+
+
+
+    
+
+
      /**
     * Processa a requisição AJAX do DataTable na página de listagem.
     * Mais informações em: http://datatables.yajrabox.com
