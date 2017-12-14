@@ -61,4 +61,20 @@ class Servico extends Model
 
 
 
+
+    public function getDatatable()
+    {
+        return $this->ativo()->select(['id', 'nome', 'valor' , 'duracao_aproximada' , 'observacoes',
+        'porcentagem_funcionario' , 'categoria'  ,'desconto_maximo' ,   ]);        
+    }
+    
+    public function getDatatableApagados()
+    {
+        return $this->inativo()->select(['id', 'nome', 'valor' , 'duracao_aproximada' , 'observacoes',
+        'porcentagem_funcionario' , 'categoria'  ,'desconto_maximo' ,   ]);        
+    }
+
+
+
+
 }

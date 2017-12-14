@@ -55,4 +55,26 @@ class Produto extends Model
         ];
     }
 
+
+
+
+
+
+
+
+
+
+    
+    public function getDatatable()
+    {
+        return $this->ativo()->select(['id', 'nome', 'valor' ,
+        'observacoes' , 'desconto_maximo'   ]);        
+    }
+    
+    public function getDatatableApagados()
+    {
+        return $this->inativo()->select(['id', 'nome', 'valor' ,
+        'observacoes' , 'desconto_maximo'   ]);        
+    }
+
 }
