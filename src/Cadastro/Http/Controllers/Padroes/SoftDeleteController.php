@@ -3,6 +3,7 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 
 use Illuminate\Http\Request;
 use DataTables;
+use App\Constants\ErrosSQL;
 
 class SoftDeleteController extends Controller
 {
@@ -13,15 +14,12 @@ class SoftDeleteController extends Controller
     public function index()
     {
         return view("{$this->view}.index");
-        // $models = $this->model::paginate($this->totalPage);
-        //return view("{$this->view}.index", compact('models'));
     }
 
 
     
     public function indexApagados()
     {
-        //$models = $this->model->onlyTrashed()->paginate($this->totalPage);
         return view("{$this->view_apagados}.index");
     }
 
@@ -108,11 +106,11 @@ class SoftDeleteController extends Controller
         try {
             $model = $this->model->withTrashed()->find($id);  
             $delete = $model->forceDelete();        
-            $msg = __('msg.sucesso_excluido', ['1' => 'Tipo de Seção']);
+            $msg = __('msg.sucesso_excluido', ['1' =>  $this->name ]);
         } catch(\Illuminate\Database\QueryException $e) {
             $erro = true;
             $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
-                __('msg.erro_exclusao_fk', ['1' => 'Tipo de Seção', '2' => 'Seção']):
+                __('msg.erro_exclusao_fk', ['1' =>  $this->name  , '2' => 'Seção']):
                 __('msg.erro_bd');
         }
         return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
@@ -194,7 +192,7 @@ class SoftDeleteController extends Controller
         return Datatables::of($models)
             ->addColumn('action', function($linha) {
                 return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
-                    . '<a href="'.route("{$this->route}.showApagados", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
+                    . '<a href="'.route("{$this->route}.apagados", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
             })->make(true);
     }
 

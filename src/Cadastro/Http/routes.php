@@ -3,10 +3,6 @@ use Illuminate\Support\Facades\Route;
 
     Route::group(['prefix' => 'cadastro', 'middleware' => 'auth' ], function(){
 
-
-        //Route::get('operadoras/pesquisarApagados', 'OperadoraController@pesquisarApagados')->name('operadoras.pesquisarApagados');
-        //Route::get('operadoras/pesquisar', 'OperadoraController@pesquisar')->name('operadoras.pesquisar');
-        
         // OPERADORAS
         Route::get('operadoras/apagados/{id}', 'OperadoraController@showApagado')->name('operadoras.showapagado');     
         Route::get('operadoras/apagados', 'OperadoraController@indexApagados')->name('operadoras.apagados');        
@@ -21,11 +17,9 @@ use Illuminate\Support\Facades\Route;
         // SERVIÇOS
         Route::get('servicos/apagados/{id}', 'ServicoController@showApagado')->name('servicos.showapagado');        
         Route::get('servicos/apagados', 'ServicoController@indexApagados')->name('servicos.apagados');
-        Route::get('servicos/pesquisarApagados', 'ServicoController@pesquisarApagados')->name('servicos.pesquisarApagados');
-        Route::get('servicos/pesquisar', 'ServicoController@pesquisar')->name('servicos.pesquisar');
         Route::delete('servicos/apagados/{id}', 'ServicoController@destroySoft')->name('servicos.destroySoft');
         Route::get('servicos/restore/{id}', 'ServicoController@restore')->name('servicos.restore');
-       
+        Route::post('servicos/getDatatable/apagados', 'ServicoController@getDatatableApagados')->name('servicos.getDatatable.apagados');        
         Route::post('servicos/getDatatable', 'ServicoController@getDatatable')->name('servicos.getDatatable');        
         Route::resource('servicos', 'ServicoController');
 
@@ -34,13 +28,9 @@ use Illuminate\Support\Facades\Route;
         // PRODUTOS
         Route::get('produtos/apagados/{id}', 'ProdutoController@showApagado')->name('produtos.showapagado');        
         Route::get('produtos/apagados', 'ProdutoController@indexApagados')->name('produtos.apagados');
-        Route::get('produtos/pesquisarApagados', 'ProdutoController@pesquisarApagados')->name('produtos.pesquisarApagados');
-        Route::get('produtos/pesquisar', 'ProdutoController@pesquisar')->name('produtos.pesquisar');
         Route::delete('produtos/apagados/{id}', 'ProdutoController@destroySoft')->name('produtos.destroySoft');
         Route::get('produtos/restore/{id}', 'ProdutoController@restore')->name('produtos.restore');
-        
         Route::post('produtos/getDatatable/apagados', 'ProdutoController@getDatatableApagados')->name('produtos.getDatatable.apagados');        
-        
         Route::post('produtos/getDatatable', 'ProdutoController@getDatatable')->name('produtos.getDatatable');        
         Route::resource('produtos', 'ProdutoController'); 
 
