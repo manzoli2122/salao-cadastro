@@ -4,6 +4,17 @@
 	Listagem dos Operadoras			
 @endsection
 
+
+
+@section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
+	@permissao('operadoras-apagados')
+		<li><a href="{{  route('operadoras.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Operadoras Apagadas</span></a></li>
+	@endpermissao
+@endsection
+
+
+		
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">

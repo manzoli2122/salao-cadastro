@@ -2,6 +2,7 @@
 namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 
 use Illuminate\Http\Request;
+use DataTables;
 
 class SoftDeleteController extends Controller
 {
