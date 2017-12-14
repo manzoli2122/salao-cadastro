@@ -4,7 +4,7 @@ namespace Manzoli2122\Salao\Cadastro\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
-
+use DB;
 class Produto extends Model
 {
     public function newInstance($attributes = [], $exists = false)
@@ -67,7 +67,7 @@ class Produto extends Model
     
     public function getDatatable()
     {
-        return $this->ativo()->select(['id', 'nome', 'valor' ,
+        return $this->ativo()->select(['id', 'nome',  DB::raw(  " concat('R$ ', ROUND  (valor , 2 ) ) as valor" )  ,
         'observacoes' , 'desconto_maximo'   ]);        
     }
     

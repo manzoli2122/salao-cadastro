@@ -4,6 +4,7 @@ namespace Manzoli2122\Salao\Cadastro\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+use DB;
 
 class Servico extends Model
 {
@@ -64,7 +65,7 @@ class Servico extends Model
 
     public function getDatatable()
     {
-        return $this->ativo()->select(['id', 'nome', 'valor' , 'duracao_aproximada' , 'observacoes',
+        return $this->ativo()->select(['id', 'nome', DB::raw(  " concat('R$ ', ROUND  ( valor , 2 ) ) as valor" )  , 'duracao_aproximada' , 'observacoes',
         'porcentagem_funcionario' , 'categoria'  ,'desconto_maximo' ,   ]);        
     }
     
