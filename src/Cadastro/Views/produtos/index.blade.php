@@ -4,6 +4,14 @@
 	Listagem dos Produtos			
 @endsection
 
+
+@section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
+	@permissao('operadoras-apagados')
+		<li><a href="{{  route('produtos.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Produtos Apagados</span></a></li>
+	@endpermissao
+@endsection
+
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">

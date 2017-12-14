@@ -4,6 +4,14 @@
 	Listagem dos Serviços			
 @endsection
 
+
+@section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
+	@permissao('operadoras-apagados')
+		<li><a href="{{  route('servicos.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Serviços Apagadas</span></a></li>
+	@endpermissao
+@endsection
+
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">
@@ -24,11 +32,11 @@
 						<th pesquisavel>Nome</th>
 						<th>Valor</th>						
 						<th>Duração Aproximada</th>						
-						<th>Observações</th>
+						
 						<th>Porcentagem Funcionário</th>
 						<th>Categoria</th>
 						<th>Desconto Máximo</th>												
-                        <th class="align-center">Ações</th>
+                        <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
             </table>
@@ -54,7 +62,7 @@
 					{ data: 'nome', name: 'nome' },
 					{ data: 'valor', name: 'valor' },
 					{ data: 'duracao_aproximada', name: 'duracao_aproximada' },
-					{ data: 'observacoes', name: 'observacoes' },
+					
 					{ data: 'porcentagem_funcionario', name: 'porcentagem_funcionario' },
 					{ data: 'categoria', name: 'categoria' },
 					{ data: 'desconto_maximo', name: 'desconto_maximo' },
