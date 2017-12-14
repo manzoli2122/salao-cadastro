@@ -40,11 +40,33 @@ class Operadora extends Model
         ];
     }
 
+
+
+
+
+
     public function index($totalPage)
     {
         return $this->orderBy('nome', 'asc')->paginate($totalPage);        
     }
 
+
+    public function getDatatable()
+    {
+        return $this->select(['id', 'nome', 'porcentagem_credito',  'porcentagem_credito_parcelado' ,
+        'porcentagem_debito' , 'max_parcelas'   ]);        
+    }
+
+
+
+
+
+    
+    public function getDatatableApagados()
+    {
+        return $this->onlyTrashed()->select(['id', 'nome', 'porcentagem_credito',  'porcentagem_credito_parcelado' ,
+        'porcentagem_debito' , 'max_parcelas'   ]);        
+    }
    
 
     protected $dates = ['deleted_at'];

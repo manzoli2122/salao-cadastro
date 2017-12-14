@@ -101,7 +101,7 @@ class ProdutoController extends StandardAtivoController
     */
     public function getDatatable()
     {
-        $models = Produto::select(['id', 'nome', 'valor' ,
+        $models = Produto::ativo()->select(['id', 'nome', 'valor' ,
                         'observacoes' , 'desconto_maximo'   ]);
         return Datatables::of($models)
             ->addColumn('action', function($linha) {
