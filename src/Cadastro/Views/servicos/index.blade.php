@@ -6,8 +6,8 @@
 
 
 @section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
-	@permissao('operadoras-apagados')
-		<li><a href="{{  route('servicos.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Serviços Apagadas</span></a></li>
+	@permissao('servicos-apagados')
+		<li><a href="{{  route('servicos.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Serviços Apagados</span></a></li>
 	@endpermissao
 @endsection
 
@@ -16,13 +16,13 @@
 
 <div class="col-xs-12">
     <div class="box box-success">
-        <div class="box-header align-right">
-			@permissao('servicos-cadastrar')
+		@permissao('servicos-cadastrar')
+        	<div class="box-header align-right">			
 				<a href="{{ route('servicos.create')}}" class="btn btn-success" title="Adicionar um novo Serviço">
 					<i class="fa fa-plus"></i> Cadastrar Serviço
-				</a>
-			@endpermissao            
-        </div>
+				</a>          
+        	</div>
+		@endpermissao  
 
         <div class="box-body">
             <table class="table table-bordered table-striped table-hover" id="datatable">
@@ -31,8 +31,7 @@
 						<th>ID</th>
 						<th pesquisavel>Nome</th>
 						<th>Valor</th>						
-						<th>Duração Aproximada</th>						
-						
+						<th>Duração Aproximada</th>										
 						<th>Porcentagem Funcionário</th>
 						<th>Categoria</th>
 						<th>Desconto Máximo</th>												
@@ -61,8 +60,7 @@
 					{ data: 'id', name: 'id' },
 					{ data: 'nome', name: 'nome' },
 					{ data: 'valor', name: 'valor' },
-					{ data: 'duracao_aproximada', name: 'duracao_aproximada' },
-					
+					{ data: 'duracao_aproximada', name: 'duracao_aproximada' },					
 					{ data: 'porcentagem_funcionario', name: 'porcentagem_funcionario' },
 					{ data: 'categoria', name: 'categoria' },
 					{ data: 'desconto_maximo', name: 'desconto_maximo' },
@@ -72,7 +70,7 @@
 
 			dataTable.on('draw', function () {
 				$('[btn-excluir]').click(function (){
-					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('servicos.apagados') }}", 
+					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => serviços'])", "{{ route('servicos.apagados') }}", 
 						function(){
 							dataTable.row( $(this).parents('tr') ).remove().draw('page');
 						}
