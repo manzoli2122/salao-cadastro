@@ -26,7 +26,7 @@
 						<th>Observações</th>
 						<th>Desconto Máximo</th>
 												
-                        <th class="align-center">Ações</th>
+                        <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
             </table>

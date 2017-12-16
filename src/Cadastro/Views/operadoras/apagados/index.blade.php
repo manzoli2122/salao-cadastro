@@ -27,7 +27,7 @@
 						<th>Porc. Debito</th>
 						<th>Máximo de Parcelas</th>					
 						
-                        <th class="align-center">Ações</th>
+                        <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
             </table>
