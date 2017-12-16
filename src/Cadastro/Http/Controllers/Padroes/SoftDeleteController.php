@@ -221,7 +221,7 @@ class SoftDeleteController extends Controller
         } catch(\Illuminate\Database\QueryException $e) {
             $erro = true;
             $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
-                __('msg.erro_exclusao_fk', ['1' =>  $this->name  , '2' => 'Seção']):
+                __('msg.erro_exclusao_fk', ['1' =>  $this->name  , '2' => 'Model']):
                 __('msg.erro_bd');
         }
         return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);

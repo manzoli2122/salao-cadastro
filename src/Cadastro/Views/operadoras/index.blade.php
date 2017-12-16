@@ -19,13 +19,13 @@
 
 <div class="col-xs-12">
     <div class="box box-success">
-        <div class="box-header align-right">
-			@permissao('operadoras-cadastrar')
+		@permissao('operadoras-cadastrar')
+        	<div class="box-header align-right">			
 				<a href="{{ route('operadoras.create')}}" class="btn btn-success" title="Adicionar uma nova Operadora">
 					<i class="fa fa-plus"></i> Cadastrar Operadora
-				</a>
-			@endpermissao            
-        </div>
+				</a>			           
+        	</div>
+		@endpermissao 
 
         <div class="box-body">
             <table class="table table-bordered table-striped table-hover" id="datatable">
@@ -73,7 +73,7 @@
 
 			dataTable.on('draw', function () {
 				$('[btn-excluir]').click(function (){
-					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('operadoras.apagados') }}", 
+					excluirRecursoPeloId($(this).data('id'), "@lang('msg.conf_excluir_o', ['1' => 'operadora'])", "{{ route('operadoras.apagados') }}", 
 						function(){
 							dataTable.row( $(this).parents('tr') ).remove().draw('page');
 						}

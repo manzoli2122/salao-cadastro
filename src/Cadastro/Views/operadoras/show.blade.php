@@ -38,14 +38,16 @@
 
 
         <div class="box-footer align-right">
-            <button type="button" class="btn btn-danger" id='btnExcluir' remover-apos-excluir>
-                <i class="fa fa-times"></i> Excluir
-            </button>
-
-            <a href="{{route('operadoras.edit', $model->id)}}" class="btn btn-success" title="Editar" remover-apos-excluir> 
-                <i class="fa fa-pencil"></i> Editar
-            </a>
-
+            @permissao('operadoras-soft-delete')
+                <button type="button" class="btn btn-danger" id='btnExcluir' remover-apos-excluir>
+                    <i class="fa fa-times"></i> Excluir
+                </button>
+             @endpermissao
+            @permissao('operadoras-editar')
+                <a href="{{route('operadoras.edit', $model->id)}}" class="btn btn-success" title="Editar" remover-apos-excluir> 
+                    <i class="fa fa-pencil"></i> Editar
+                </a>
+            @endpermissao
             <a class="btn btn-default" href="{{ URL::previous() }}">
                 <i class="fa fa-reply"></i> Voltar
             </a>
@@ -61,7 +63,7 @@
 <script>
     $(document).ready(function() {
         $('#btnExcluir').click(function (){
-            excluirRecursoPeloId({{$model->id}}, "@lang('msg.conf_excluir_o', ['1' => 'tipo de seção'])", "{{ route('operadoras.index') }}", 
+            excluirRecursoPeloId({{$model->id}}, "@lang('msg.conf_excluir_o', ['1' => 'operadora'])", "{{ route('operadoras.apagados') }}", 
                 function(){
                     $('[remover-apos-excluir]').remove();
                     $('#divAlerta').slideDown();
