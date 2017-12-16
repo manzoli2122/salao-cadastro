@@ -4,6 +4,11 @@
 	Listagem dos Serviços			
 @endsection
 
+
+@section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )	
+		<li><a href="{{  route('servicos.index')}}"><i class="fa fa-circle-o text-green"></i> <span>Serviços Ativos</span></a></li>
+@endsection
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">

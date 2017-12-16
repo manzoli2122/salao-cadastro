@@ -23,12 +23,13 @@
                 {!! $errors->first('desconto_maximo', '<p class="help-block">:message</p>') !!}
             </div>
         </div> 
-
-        <div class="form-group {{ $errors->has('observacoes') ? 'has-error' : ''}}">
-            <label for="observacoes">Observações</label>
-            <input type="text" class="form-control" name="observacoes" placeholder="observacoes"
-                value="{{$model->observacoes or old('observacoes')}}">
-            {!! $errors->first('observacoes', '<p class="help-block">:message</p>') !!}
+        <div class="col-md-12">
+            <div class="form-group {{ $errors->has('observacoes') ? 'has-error' : ''}}">
+                <label for="observacoes">Observações</label>
+                <input type="text" class="form-control" name="observacoes" placeholder="observacoes"
+                    value="{{$model->observacoes or old('observacoes')}}">
+                {!! $errors->first('observacoes', '<p class="help-block">:message</p>') !!}
+            </div>
         </div>
                      
     </div> 

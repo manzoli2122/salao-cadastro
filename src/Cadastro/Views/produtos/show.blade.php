@@ -43,7 +43,7 @@
                     <i class="fa fa-times"></i> Excluir
                 </button>
             @endpermissao
-            @permissao('produtos-soft-delete')
+            @permissao('produtos-editar')
                 <a href="{{route('produtos.edit', $model->id)}}" class="btn btn-success" title="Editar" remover-apos-excluir> 
                     <i class="fa fa-pencil"></i> Editar
                 </a>

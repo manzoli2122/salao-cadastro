@@ -1,11 +1,11 @@
-@extends( Config::get('cadastro.templateMaster' , 'templates.templateMaster')  )
+@extends( Config::get('app.templateMaster' , 'templates.templateMaster')  )
 
-@section( Config::get('cadastro.templateMasterContentTitulo' , 'titulo-page')  )		
+@section( Config::get('app.templateMasterContentTitulo' , 'titulo-page')  )		
 		{{$model->nome}}
 @endsection
 
 
-@section( Config::get('cadastro.templateMasterContent' , 'content')  )
+@section( Config::get('app.templateMasterContent' , 'content')  )
         
         <section class="row text-center dados">
             
@@ -37,7 +37,10 @@
 
 
 
-        <br>
-        <a class="btn btn-warning btn-sm" href="{{route('servicos.apagados')}}">Voltar</a>
+        <div class="box-footer align-right">
+            <a class="btn btn-default" href="{{ URL::previous() }}">
+                <i class="fa fa-reply"></i> Voltar
+            </a>
+        </div>
 
     @endsection

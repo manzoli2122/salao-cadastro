@@ -4,6 +4,13 @@
 	Listagem dos Operadoras			
 @endsection
 
+
+
+@section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )	
+		<li><a href="{{  route('operadoras.index')}}"><i class="fa fa-circle-o text-green"></i> <span>Operadoras Ativas</span></a></li>
+@endsection
+
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">
