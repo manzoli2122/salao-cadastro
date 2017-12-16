@@ -111,7 +111,7 @@ class SoftDeleteController extends Controller
         {
             $erro = true;
             $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
-                __('msg.erro_exclusao_fk', ['1' => $this->name , '2' => 'Seção']):
+                __('msg.erro_exclusao_fk', ['1' => $this->name , '2' => 'Model']):
                 __('msg.erro_bd');
         }
         return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
@@ -179,7 +179,7 @@ class SoftDeleteController extends Controller
             return redirect()->route("{$this->route}.index")->with(['success' => 'Item restaurado com sucesso']);
         }
         else{
-            return  redirect()->route("{$this->route}.showApagados",['id' => $id])->withErrors(['errors' => 'Falha ao Deletar']);
+            return  redirect()->route("{$this->route}.showapagado",['id' => $id])->withErrors(['errors' => 'Falha ao Deletar']);
         }
     }
 
@@ -205,7 +205,7 @@ class SoftDeleteController extends Controller
             ->addColumn('action', function($linha) {
                 return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
                         . '<a href="'.route("{$this->route}.restore", $linha->id).'" class="btn btn-success btn-xs" title="Restaurar"> <i class="fa fa-arrow-circle-up"></i> </a>'
-                        . '<a href="'.route("{$this->route}.showApagados", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar" style="margin-left: 3px;"> <i class="fa fa-search"></i> </a>';
+                        . '<a href="'.route("{$this->route}.showapagado", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar" style="margin-left: 3px;"> <i class="fa fa-search"></i> </a>';
             })->make(true);
     }
 
