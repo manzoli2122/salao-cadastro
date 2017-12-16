@@ -2,7 +2,7 @@
 
 
 @section( Config::get('app.templateMasterContentTitulo' , 'titulo-page')  )			
-		Editar Produto
+		Editar Serviço
 @endsection
     
 
