@@ -4,7 +4,7 @@
             <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" name="nome" placeholder="Nome da Operadora de cartão"
-                    value="{{$model->nome or old('nome')}}">
+                    value="{{$model->nome or old('nome')}}" {{$model->id ? 'readonly' : '' }}>
                 {!! $errors->first('nome', '<p class="help-block">:message</p>') !!}
             </div>
             <div class="form-group {{ $errors->has('valor') ? 'has-error' : ''}}">
@@ -26,17 +26,17 @@
 
             <div class="form-group {{ $errors->has('categoria') ? 'has-error' : ''}}">
                 <label for="categoria">Categoria</label>
-                 <select class="form-control" name="categoria" value="{{$model->desconto_maximo or old('desconto_maximo')}}" required>
+                 <select class="form-control" name="categoria"  required>
                     <option value="">Selecione a Categoria</option>
-                    <option value="Cabelo" >  Cabelo  </option>
-                    <option value="Depilação" >  Depilação  </option>
-                    <option value="Estetica Corporal" >  Estetica Corporal  </option>
-                    <option value="Estetica Facial" >  Estetica Facial  </option>
-                    <option value="Manicure e Pedicure" >  Manicure e Pedicure  </option>
-                    <option value="Maquiagem" >  Maquiagem  </option>
-                    <option value="Massagem" >  Massagem  </option>
-                    <option value="Podologia" >  Podologia  </option>
-                    <option value="Outros" >  Outros  </option>
+                    <option value="Cabelo" {{$model->categoria == 'Cabelo' ? 'selected' : ''  }}>  Cabelo  </option>
+                    <option value="Depilação" {{$model->categoria == 'Depilação' ? 'selected' : ''  }}>  Depilação  </option>
+                    <option value="Estetica Corporal" {{$model->categoria == 'Estetica Corporal' ? 'selected' : ''  }}>  Estetica Corporal  </option>
+                    <option value="Estetica Facial" {{$model->categoria == 'Estetica Facial' ? 'selected' : ''  }}>  Estetica Facial  </option>
+                    <option value="Manicure e Pedicure" {{$model->categoria == 'Manicure e Pedicure' ? 'selected' : ''  }} >  Manicure e Pedicure  </option>
+                    <option value="Maquiagem" {{$model->categoria == 'Maquiagem' ? 'selected' : ''  }}>  Maquiagem  </option>
+                    <option value="Massagem" {{$model->categoria == 'Massagem' ? 'selected' : ''  }}>  Massagem  </option>
+                    <option value="Podologia" {{$model->categoria == 'Podologia' ? 'selected' : ''  }} >  Podologia  </option>
+                    <option value="Outros" {{$model->categoria == 'Outros' ? 'selected' : ''  }}>  Outros  </option>
                 </select> 
                 {!! $errors->first('categoria', '<p class="help-block">:message</p>') !!}
             </div> 

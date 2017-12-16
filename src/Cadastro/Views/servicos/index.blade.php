@@ -28,13 +28,13 @@
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
                     <tr>
-						<th>ID</th>
+						<th  style="max-width:30px">ID</th>
 						<th pesquisavel>Nome</th>
 						<th>Valor</th>						
-						<th>Duração Aproximada</th>										
-						<th>Porcentagem Funcionário</th>
+						<th style="max-width:80px">Duração Aproximada</th>										
+						<th style="max-width:80px">Porcentagem Funcionário</th>
 						<th>Categoria</th>
-						<th>Desconto Máximo</th>												
+						<th style="max-width:70px">Desconto Máximo</th>												
                         <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
