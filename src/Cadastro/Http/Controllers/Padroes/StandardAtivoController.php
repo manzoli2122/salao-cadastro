@@ -218,7 +218,7 @@ class StandardAtivoController extends Controller
             ->addColumn('action', function($linha) {
                 return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
                         . '<a href="'.route("{$this->route}.restore", $linha->id).'" class="btn btn-success btn-xs" title="Restaurar"> <i class="fa fa-arrow-circle-up"></i> </a>'
-                        . '<a href="'.route("{$this->route}.apagados", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"  style="margin-left: 3px;"> <i class="fa fa-search"></i> </a>';
+                        . '<a href="'.route("{$this->route}.showApagados", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"  style="margin-left: 3px;"> <i class="fa fa-search"></i> </a>';
             })->make(true);
     }
 
