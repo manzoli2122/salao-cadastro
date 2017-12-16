@@ -9,22 +9,16 @@ use DataTables;
 class StandardAtivoController extends Controller
 {
     
-    protected $totalPage = 10;
-    protected $upload = false;
-
-
+    protected $view_apagados;
+    protected $view ;
+    protected $route ;
+    protected $name ;
+    protected $model;
 
 
     public function index()
     {
         return view("{$this->view}.index");
-    }
-
-
-
-    public function indexApagados()
-    {
-        return view("{$this->view_apagados}.index");
     }
 
 
@@ -47,7 +41,7 @@ class StandardAtivoController extends Controller
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
-            return redirect()->route("{$this->route}.create")->withErrors(['errors' =>'Erro no Cadastro'])->withInput();
+            return redirect()->route("{$this->route}.create")->withErrors(['message' => __('msg.erro_nao_store', ['1' => $this->name  ])]);
         }
     }
 
@@ -67,16 +61,6 @@ class StandardAtivoController extends Controller
 
 
 
-    public function showApagado($id)
-    {
-        $model = $this->model->inativo()->find($id);
-        if($model){
-            return view("{$this->view_apagados}.show", compact('model'));
-        }
-        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
-
-       
-    }
 
 
 
@@ -106,6 +90,78 @@ class StandardAtivoController extends Controller
 
 
 
+    
+    public function destroySoft($id)
+    {
+        try {            
+            $model = $this->model->ativo()->find($id);
+            $model->ativo = false ; 
+            $delete = $model->save();                  
+            $msg = __('msg.sucesso_excluido', ['1' => $this->name ]);
+        } 
+        catch(\Illuminate\Database\QueryException $e) 
+        {
+            $erro = true;
+            $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
+                __('msg.erro_exclusao_fk', ['1' => $this->name , '2' => 'Seção']):
+                __('msg.erro_bd');
+        }
+        return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
+
+    }
+
+
+      
+    /**
+    * Processa a requisição AJAX do DataTable na página de listagem.
+    * Mais informações em: http://datatables.yajrabox.com
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function getDatatable()
+    {
+        $models = $this->model->getDatatable();
+        return Datatables::of($models)
+            ->addColumn('action', function($linha) {
+                return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
+                    . '<a href="'.route("{$this->route}.edit", $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
+                    . '<a href="'.route("{$this->route}.show", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
+            })->make(true);
+    }
+
+
+
+    
+//==================================================================================================================================
+//==================================================================================================================================
+//      FUNCOES PARA OS APAGADOS
+//==================================================================================================================================
+//==================================================================================================================================
+
+
+
+
+
+    public function indexApagados()
+    {
+        return view("{$this->view_apagados}.index");
+    }
+
+
+
+    
+    public function showApagado($id)
+    {
+        $model = $this->model->inativo()->find($id);
+        if($model){
+            return view("{$this->view_apagados}.show", compact('model'));
+        }
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+
+       
+    }
+
+
 
     public function destroy($id)
     {
@@ -127,27 +183,6 @@ class StandardAtivoController extends Controller
 
    
 
-    public function destroySoft($id)
-    {
-        try {            
-            $model = $this->model->ativo()->find($id);
-            $model->ativo = false ; 
-            $delete = $model->save();                  
-            $msg = __('msg.sucesso_excluido', ['1' => $this->name ]);
-        } 
-        catch(\Illuminate\Database\QueryException $e) 
-        {
-            $erro = true;
-            $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
-                __('msg.erro_exclusao_fk', ['1' => $this->name , '2' => 'Seção']):
-                __('msg.erro_bd');
-        }
-        return response()->json(['erro' => isset($erro), 'msg' => $msg], 200);
-
-    }
-
-
-
 
     public function restore($id)
     {
@@ -164,23 +199,7 @@ class StandardAtivoController extends Controller
 
 
 
-    
-    /**
-    * Processa a requisição AJAX do DataTable na página de listagem.
-    * Mais informações em: http://datatables.yajrabox.com
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function getDatatable()
-    {
-        $models = $this->model->getDatatable();
-        return Datatables::of($models)
-            ->addColumn('action', function($linha) {
-                return '<button data-id="'.$linha->id.'" btn-excluir type="button" class="btn btn-danger btn-xs" title="Excluir"> <i class="fa fa-times"></i> </button> '
-                    . '<a href="'.route("{$this->route}.edit", $linha->id).'" class="btn btn-primary btn-xs" title="Editar"> <i class="fa fa-pencil"></i> </a> '
-                    . '<a href="'.route("{$this->route}.show", $linha->id).'" class="btn btn-primary btn-xs" title="Visualizar"> <i class="fa fa-search"></i> </a>';
-            })->make(true);
-    }
+  
 
 
 
@@ -206,48 +225,5 @@ class StandardAtivoController extends Controller
 
 
 
-
-
-
-
-    
-
-
-
-    
-
-
 }
 
-
-
-
-    /*
-    public function pesquisar(Request $request)
-    {        
-        $apagados = false; 
-        $dataForm = $request->except('_token');
-        if(!isset($dataForm['key'])){
-            return redirect()->route("{$this->route}.index");           
-        }
-            $models = $this->model->ativo()->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage); 
-        return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados'));
-      
-    }
-
-
-    public function pesquisarApagados(Request $request)
-    {       
-        $apagados = true; 
-        $dataForm = $request->except('_token');
-        
-        if(!isset($dataForm['key'])){  
-            return redirect()->route("{$this->route}.apagados");            
-        }    
-        $models = $this->model->inativo()->where('nome','LIKE', "%{$dataForm['key']}%")->paginate($this->totalPage);       
-        return view("{$this->view}.index", compact('models', 'dataForm' , 'apagados' ));
-    }
-
-    
-    
-*/

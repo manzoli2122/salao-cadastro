@@ -13,7 +13,7 @@ class ServicoController extends StandardAtivoController
     protected $view = "cadastro::servicos";
     protected $view_apagados = "cadastro::servicos.apagados";
     protected $route = "servicos";
-    protected $totalPage = 10;
+    
 
     public function __construct(Servico $servico){
         $this->model = $servico;
