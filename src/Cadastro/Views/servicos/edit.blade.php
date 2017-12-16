@@ -11,15 +11,15 @@
 <div class="col-md-12">
     <div class="box box-success">
 
-        <form method="post" action="{{route('produtos.update', $model->id)}}">
+        <form method="post" action="{{route('servicos.update', $model->id)}}">
             
             {{csrf_field()}}
             <input name="_method" type="hidden" value="PATCH">
 
-            @include('cadastro::produtos._form', ['model' => $model])
+            @include('cadastro::servicos._form', ['model' => $model])
 
             <div class="box-footer align-right">
-                <a class="btn btn-default" href="{{ route('produtos.index') }}">
+                <a class="btn btn-default" href="{{ route('servicos.index') }}">
                     <i class="fa fa-reply"></i> Cancelar
                 </a>
 
