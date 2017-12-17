@@ -13,7 +13,7 @@
         "php": ">=7.0.0",              
         "laravelcollective/html": "^5.4.0",
         
-        "manzoli2122/all": "dev-master"
+        "manzoli2122/all": "2.0.0"
     },
     
     "autoload": {
