@@ -65,14 +65,16 @@ class Servico extends Model
 
     public function getDatatable()
     {
-        return $this->ativo()->select(['id', 'nome', DB::raw(  " concat('R$', ROUND  (valor , 2 ) ) as valor" )  , 'duracao_aproximada' , 'observacoes',
-        'porcentagem_funcionario' , 'categoria'  ,'desconto_maximo' ,   ]);        
+        return $this->ativo()->select(['id', 'nome', DB::raw(  " concat('R$', ROUND  (valor , 2 ) ) as valor" )  ,  
+                                    DB::raw(  " concat( duracao_aproximada , 'min' ) as duracao_aproximada" )  , 'observacoes',
+                                    DB::raw(  " concat( porcentagem_funcionario , '%' ) as porcentagem_funcionario" ) , 'categoria'  ,'desconto_maximo' ,   ]);        
     }
     
     public function getDatatableApagados()
     {
-        return $this->inativo()->select(['id', 'nome', DB::raw(  " concat('R$', ROUND  (valor , 2 ) ) as valor" )  , 'duracao_aproximada' , 'observacoes',
-        'porcentagem_funcionario' , 'categoria'  ,'desconto_maximo' ,    ]);        
+        return $this->inativo()->select(['id', 'nome', DB::raw(  " concat('R$', ROUND  (valor , 2 ) ) as valor" )  , 
+                                    DB::raw(  " concat( duracao_aproximada , 'min' ) as duracao_aproximada" ) , 'observacoes',
+                                    DB::raw(  " concat( porcentagem_funcionario , '%' ) as porcentagem_funcionario" ) , 'categoria'  ,'desconto_maximo' ,    ]);        
     }
 
 
