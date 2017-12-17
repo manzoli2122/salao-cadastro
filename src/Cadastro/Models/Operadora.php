@@ -45,14 +45,20 @@ class Operadora extends Model
 
     public function getDatatable()
     {
-        return $this->select(['id', 'nome', 'porcentagem_credito',  'porcentagem_credito_parcelado' ,
-        'porcentagem_debito' , 'max_parcelas'   ]);        
+        return $this->select(['id', 'nome', 
+                        DB::raw(  " concat( porcentagem_credito , '%' ) as porcentagem_credito" )  , 
+                        DB::raw(  " concat( porcentagem_credito_parcelado , '%' ) as porcentagem_credito_parcelado" )  ,
+                        DB::raw(  " concat( porcentagem_debito , '%' ) as porcentagem_debito" ) , 
+                        DB::raw(  " concat( max_parcelas , 'X' ) as max_parcelas" )   ]);        
     }
     
     public function getDatatableApagados()
     {
-        return $this->onlyTrashed()->select(['id', 'nome', 'porcentagem_credito',  'porcentagem_credito_parcelado' ,
-        'porcentagem_debito' , 'max_parcelas'   ]);        
+        return $this->onlyTrashed()->select(['id', 'nome', 
+                        DB::raw(  " concat( porcentagem_credito , '%' ) as porcentagem_credito" )  , 
+                        DB::raw(  " concat( porcentagem_credito_parcelado , '%' ) as porcentagem_credito_parcelado" )  ,
+                        DB::raw(  " concat( porcentagem_debito , '%' ) as porcentagem_debito" ) , 
+                        DB::raw(  " concat( max_parcelas , 'X' ) as max_parcelas" )  ]);        
     }
    
 
