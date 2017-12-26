@@ -4,12 +4,13 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
 
 use Manzoli2122\Salao\Cadastro\Models\Operadora;
 use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\SoftDeleteController ;
-
+use ChannelLog as Log;
 
 class OperadoraController extends SoftDeleteController
 {
   
     protected $model;
+    protected $logCannel;
     protected $name = "Operadora";
     protected $view = "cadastro::operadoras";
     protected $view_apagados = "cadastro::operadoras.apagados";
@@ -19,6 +20,8 @@ class OperadoraController extends SoftDeleteController
         $this->model = $operadora;
         $this->middleware('auth');
 
+        $this->logCannel = 'cadastro';
+
         $this->middleware('permissao:operadoras')->only([ 'index' , 'show' ]) ;        
         $this->middleware('permissao:operadoras-cadastrar')->only([ 'create' , 'store']);
         $this->middleware('permissao:operadoras-editar')->only([ 'edit' , 'update']);
@@ -27,7 +30,9 @@ class OperadoraController extends SoftDeleteController
         $this->middleware('permissao:operadoras-admin-permanete-delete')->only([ 'destroy' ]);
         $this->middleware('permissao:operadoras-apagados')->only([ 'indexApagados' , 'showApagado']) ;
         
-
     }   
+
+
+    // Log::write('cadastro', 'User sent out 3 voucher.')
 
 }

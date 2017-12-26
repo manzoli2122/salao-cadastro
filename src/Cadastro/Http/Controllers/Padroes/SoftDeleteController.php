@@ -4,6 +4,7 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Constants\ErrosSQL;
+use ChannelLog as Log;
 
 class SoftDeleteController extends Controller
 {
@@ -13,7 +14,7 @@ class SoftDeleteController extends Controller
     protected $route;
     protected $name ;
     protected $model;
-
+    protected $logCannel = 'audit' ;
 
 
 
@@ -41,6 +42,7 @@ class SoftDeleteController extends Controller
         $dataForm = $request->all();              
         $insert = $this->model->create($dataForm);           
         if($insert){
+            Log::write($this->logCannel , 'Cadastro realizado com sucesso!!' . $insert );
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
