@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Constants\ErrosSQL;
 use ChannelLog as Log;
+use Mail;
 
 class SoftDeleteController extends Controller
 {
@@ -42,7 +43,22 @@ class SoftDeleteController extends Controller
         $dataForm = $request->all();              
         $insert = $this->model->create($dataForm);           
         if($insert){
-            Log::write($this->logCannel , 'Cadastro realizado com sucesso!!' . $insert );
+            
+            $msg =  $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel' . session('users') ;
+
+            Log::write($this->logCannel , $msg  );
+            
+            //$msg = "Atendimento criado por " . session('users');
+            Mail::raw( $msg , function($message){
+                
+                $message->from('manzoli.elisandra@gmail.com', 'Salao Espaco Vip');
+
+                $message->to('manzoli2122@gmail.com')->subject('Cadastro de ' .  $this->name );
+
+            });
+
+            
+            
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
