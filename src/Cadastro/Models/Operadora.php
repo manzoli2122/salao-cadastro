@@ -5,7 +5,7 @@ namespace Manzoli2122\Salao\Cadastro\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
-
+use DB;
 class Operadora extends Model
 {
     use SoftDeletes;
