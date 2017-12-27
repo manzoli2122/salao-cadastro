@@ -47,8 +47,8 @@ class StandardAtivoController extends Controller
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg  );            
             Mail::raw( $msg , function($message){                
-                $message->from( $enviador , $nome_enviador);
-                $message->to( $destinatario )->subject('Cadastro de ' .  $this->name );
+                $message->from( $this->enviador , $this->nome_enviador);
+                $message->to( $this->destinatario )->subject('Cadastro de ' .  $this->name );
             });
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
@@ -118,8 +118,8 @@ class StandardAtivoController extends Controller
             Log::write( $this->logCannel , $msg2  );            
             //$msg = "Atendimento criado por " . session('users');
             Mail::raw( $msg2 , function($message){                
-                $message->from( $enviador , $nome_enviador );
-                $message->to($destinatario)->subject('Cadastro de ' .  $this->name );
+                $message->from( $this->enviador , $this->nome_enviador );
+                $message->to($this->destinatario)->subject('Cadastro de ' .  $this->name );
             });
         } 
         catch(\Illuminate\Database\QueryException $e) 
