@@ -13,12 +13,12 @@ class ServicoController extends StandardAtivoController
     protected $view = "cadastro::servicos";
     protected $view_apagados = "cadastro::servicos.apagados";
     protected $route = "servicos";
-    
+    protected $logCannel;
 
     public function __construct(Servico $servico){
         $this->model = $servico;
         $this->middleware('auth');
-
+        $this->logCannel = 'cadastro';
         $this->middleware('permissao:servicos')->only([ 'index' , 'show'  ]) ;        
         $this->middleware('permissao:servicos-cadastrar')->only([ 'create' , 'store']);
         $this->middleware('permissao:servicos-editar')->only([ 'edit' , 'update']);

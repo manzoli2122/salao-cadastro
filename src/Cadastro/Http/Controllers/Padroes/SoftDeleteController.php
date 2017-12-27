@@ -44,17 +44,11 @@ class SoftDeleteController extends Controller
         $insert = $this->model->create($dataForm);           
         if($insert){
             
-            $msg =  $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel' . session('users') ;
-
-            Log::write($this->logCannel , $msg  );
-            
-            //$msg = "Atendimento criado por " . session('users');
-            Mail::raw( $msg , function($message){
-                
+            $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );            
+            Mail::raw( $msg , function($message){                
                 $message->from('manzoli.elisandra@gmail.com', 'Salao Espaco Vip');
-
                 $message->to('manzoli2122@gmail.com')->subject('Cadastro de ' .  $this->name );
-
             });
 
             
@@ -102,6 +96,9 @@ class SoftDeleteController extends Controller
         $update = $model->update($dataForm);         
         
         if($update){
+            $msg =  "UPDATEs- " . $this->name . ' alterado(a) com sucesso !! ' . $update . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );
+
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_alterado', ['1' => $this->name ]));
         }        
         else {
@@ -124,6 +121,14 @@ class SoftDeleteController extends Controller
             $model = $this->model->find($id);
             $delete = $model->delete();                   
             $msg = __('msg.sucesso_excluido', ['1' => $this->name ]);
+            
+            $msg2 =  "DELETEs - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg2  );            
+            //$msg = "Atendimento criado por " . session('users');
+            Mail::raw( $msg2 , function($message){                
+                $message->from('manzoli.elisandra@gmail.com', 'Salao Espaco Vip');
+                $message->to('manzoli2122@gmail.com')->subject('Cadastro de ' .  $this->name );
+            });
         } 
         catch(\Illuminate\Database\QueryException $e) 
         {
@@ -194,6 +199,8 @@ class SoftDeleteController extends Controller
         $model = $this->model->withTrashed()->find($id);
         $restore = $model->restore();
         if($restore){
+            $msg =  "RESTOREs- " . $this->name . ' restaurado(a) com sucesso !! ' . $restore . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );
             return redirect()->route("{$this->route}.index")->with(['success' => 'Item restaurado com sucesso']);
         }
         else{

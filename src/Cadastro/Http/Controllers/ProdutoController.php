@@ -16,11 +16,11 @@ class ProdutoController extends StandardAtivoController
     protected $view = "cadastro::produtos";
     protected $view_apagados = "cadastro::produtos.apagados";
     protected $route = "produtos";
-   
+    protected $logCannel;
     public function __construct(Produto $produto){
         $this->model = $produto;
         $this->middleware('auth');
-
+        $this->logCannel = 'cadastro';
         $this->middleware('permissao:produtos')->only([ 'index' , 'show'  ]) ;        
         $this->middleware('permissao:produtos-cadastrar')->only([ 'create' , 'store']);
         $this->middleware('permissao:produtos-editar')->only([ 'edit' , 'update']);
