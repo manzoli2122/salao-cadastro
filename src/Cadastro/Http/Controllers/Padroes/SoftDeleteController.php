@@ -18,6 +18,11 @@ class SoftDeleteController extends Controller
     protected $logCannel = 'audit' ;
 
 
+    protected $destinatario = 'manzoli2122@gmail.com' ;
+    protected $enviador = 'manzoli.elisandra@gmail.com' ;
+    protected $nome_enviador = 'Salao Espaco Vip' ;
+
+
 
     public function index()
     {
@@ -47,8 +52,8 @@ class SoftDeleteController extends Controller
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg  );            
             Mail::raw( $msg , function($message){                
-                $message->from('manzoli.elisandra@gmail.com', 'Salao Espaco Vip');
-                $message->to('manzoli2122@gmail.com')->subject('Cadastro de ' .  $this->name );
+                $message->from( $enviador , $nome_enviador);
+                $message->to( $destinatario )->subject('Cadastro de ' .  $this->name );
             });
 
             
@@ -126,8 +131,8 @@ class SoftDeleteController extends Controller
             Log::write( $this->logCannel , $msg2  );            
             //$msg = "Atendimento criado por " . session('users');
             Mail::raw( $msg2 , function($message){                
-                $message->from('manzoli.elisandra@gmail.com', 'Salao Espaco Vip');
-                $message->to('manzoli2122@gmail.com')->subject('Cadastro de ' .  $this->name );
+                $message->from( $enviador , $nome_enviador );
+                $message->to($destinatario)->subject('Cadastro de ' .  $this->name );
             });
         } 
         catch(\Illuminate\Database\QueryException $e) 

@@ -4,7 +4,8 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
 use Illuminate\Http\Request;
 use App\Constants\ErrosSQL;
 use DataTables;
-
+use ChannelLog as Log;
+use Mail;
 
 class StandardAtivoController extends Controller
 {
@@ -14,6 +15,11 @@ class StandardAtivoController extends Controller
     protected $route ;
     protected $name ;
     protected $model;
+    protected $logCannel = 'audit' ;
+
+    protected $destinatario = 'manzoli2122@gmail.com' ;
+    protected $enviador = 'manzoli.elisandra@gmail.com' ;
+    protected $nome_enviador = 'Salao Espaco Vip' ;
 
 
     public function index()
@@ -38,6 +44,12 @@ class StandardAtivoController extends Controller
         $dataForm = $request->all();              
         $insert = $this->model->create($dataForm);           
         if($insert){
+            $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );            
+            Mail::raw( $msg , function($message){                
+                $message->from( $enviador , $nome_enviador);
+                $message->to( $destinatario )->subject('Cadastro de ' .  $this->name );
+            });
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
@@ -81,6 +93,9 @@ class StandardAtivoController extends Controller
         $model = $this->model->ativo()->find($id);        
         $update = $model->update($dataForm);                
         if($update){
+            $msg =  "UPDATEs- " . $this->name . ' alterado(a) com sucesso !! ' . $update . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );
+
             return redirect()->route("{$this->route}.index")->with(['success' => 'Alteração realizada com sucesso']);
         }        
         else {
@@ -98,6 +113,14 @@ class StandardAtivoController extends Controller
             $model->ativo = false ; 
             $delete = $model->save();                  
             $msg = __('msg.sucesso_excluido', ['1' => $this->name ]);
+
+            $msg2 =  "DELETEs - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg2  );            
+            //$msg = "Atendimento criado por " . session('users');
+            Mail::raw( $msg2 , function($message){                
+                $message->from( $enviador , $nome_enviador );
+                $message->to($destinatario)->subject('Cadastro de ' .  $this->name );
+            });
         } 
         catch(\Illuminate\Database\QueryException $e) 
         {
@@ -169,6 +192,7 @@ class StandardAtivoController extends Controller
             $model = $this->model->inativo()->find($id);
             $delete = $model->delete();       
             $msg = __('msg.sucesso_excluido', ['1' =>  $this->name  ]);
+            
         } catch(\Illuminate\Database\QueryException $e) {
             $erro = true;
             $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
@@ -189,7 +213,11 @@ class StandardAtivoController extends Controller
         $model = $this->model->inativo()->find($id);
         $model->ativo = true ; 
         $restore = $model->save();
+
         if($restore){
+            $msg =  "RESTOREs- " . $this->name . ' restaurado(a) com sucesso !! ' . $restore . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg  );
+            
             return redirect()->route("{$this->route}.index")->with(['success' => 'Item restaurado com sucesso']);
         }
         else{
