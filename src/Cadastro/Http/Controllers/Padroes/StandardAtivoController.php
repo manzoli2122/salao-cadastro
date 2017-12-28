@@ -45,11 +45,18 @@ class StandardAtivoController extends Controller
         $insert = $this->model->create($dataForm);           
         if($insert){
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
-            Log::write( $this->logCannel , $msg  );            
-            Mail::raw( $msg , function($message){                
-                $message->from( $this->enviador , $this->nome_enviador);
-                $message->to( $this->destinatario )->subject('Cadastro de ' .  $this->name );
-            });
+            try {            
+                Mail::raw( $msg , function($message){                
+                    $message->from( $this->enviador , $this->nome_enviador);
+                    $message->to( $this->destinatario )->subject('Cadastro de ' .  $this->name );
+                });
+                Log::write( $this->logCannel , $msg  ); 
+            } 
+            catch(Exception $e) 
+            { 
+                Log::write( $this->logCannel , "Não foi possivel o envio de email" );
+            }
+       
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
