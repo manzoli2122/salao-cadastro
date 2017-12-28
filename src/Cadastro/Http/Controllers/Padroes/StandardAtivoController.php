@@ -52,7 +52,7 @@ class StandardAtivoController extends Controller
                 });
                 Log::write( $this->logCannel , $msg  ); 
             } 
-            catch(Exception $e) 
+            catch(Swift_TransportException $e) 
             { 
                 Log::write( $this->logCannel , "Não foi possivel o envio de email" );
             }
