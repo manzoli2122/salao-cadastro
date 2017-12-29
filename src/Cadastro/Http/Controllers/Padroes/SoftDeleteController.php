@@ -1,6 +1,6 @@
 <?php
 namespace Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes;
-use Manzoli2122\Salao\Cadastro\Mail\OperadoraMail;
+
 use Illuminate\Http\Request;
 use DataTables;
 use App\Constants\ErrosSQL;
@@ -41,6 +41,11 @@ class SoftDeleteController extends Controller
     }
 
 
+    private function mail($model)
+    {
+        return null ;
+    }
+
 
   
     public function store(Request $request)
@@ -53,7 +58,8 @@ class SoftDeleteController extends Controller
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg  );        
               
-            Mail::to($this->destinatari)->send(new OperadoraMail($insert));
+            $this->mail($insert);
+            // Mail::to($this->destinatario)->send(new OperadoraMail($insert));
 
 
             //    Mail::raw( $msg , function($message){                

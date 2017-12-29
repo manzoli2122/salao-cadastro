@@ -35,6 +35,6 @@ class OperadoraMail extends Mailable
         //return $this->view('view.name');
 
         return $this->from('manzoli.elisandra@gmail.com')
-                ->view('cadastro::emails.opearadoras.operadora');
+                ->view('cadastro::emails.operadoras.operadora');
     }
 }
