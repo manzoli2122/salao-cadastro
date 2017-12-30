@@ -44,7 +44,7 @@ class OperadoraController extends SoftDeleteController
 
     // Log::write('cadastro', 'User sent out 3 voucher.')
 
-    private function mail($model)
+    protected function mail($model)
     {
         Mail::to($this->destinatario)->send(new OperadoraMail($model));
     }

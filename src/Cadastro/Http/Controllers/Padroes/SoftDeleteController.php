@@ -41,7 +41,7 @@ class SoftDeleteController extends Controller
     }
 
 
-    private function mail($model)
+    protected function mail($model)
     {
         return null ;
     }
@@ -53,22 +53,10 @@ class SoftDeleteController extends Controller
         $this->validate($request , $this->model->rules());
         $dataForm = $request->all();              
         $insert = $this->model->create($dataForm);           
-        if($insert){
-            
+        if($insert){            
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
-            Log::write( $this->logCannel , $msg  );        
-              
-            $this->mail($insert);
-            // Mail::to($this->destinatario)->send(new OperadoraMail($insert));
-
-
-            //    Mail::raw( $msg , function($message){                
-              //      $message->from( $this->enviador , $this->nome_enviador);
-            //        $message->to( $this->destinatario )->subject('Cadastro de ' .  $this->name );
-            //    });
-                
-           
-
+            Log::write( $this->logCannel , $msg  );                      
+            $this->mail($insert);           
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
