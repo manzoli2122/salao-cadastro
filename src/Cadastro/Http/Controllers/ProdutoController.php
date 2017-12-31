@@ -17,6 +17,8 @@ class ProdutoController extends StandardAtivoController
     protected $view_apagados = "cadastro::produtos.apagados";
     protected $route = "produtos";
     protected $logCannel;
+
+    
     public function __construct(Produto $produto){
         $this->model = $produto;
         $this->middleware('auth');

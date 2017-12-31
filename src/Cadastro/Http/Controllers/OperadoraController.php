@@ -6,7 +6,7 @@ use Manzoli2122\Salao\Cadastro\Models\Operadora;
 use Manzoli2122\Salao\Cadastro\Mail\OperadoraMail;
 use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\SoftDeleteController ;
 //use ChannelLog as Log;
-use Mail;
+//use Mail;
 
 class OperadoraController extends SoftDeleteController
 {
@@ -18,9 +18,9 @@ class OperadoraController extends SoftDeleteController
     protected $view_apagados = "cadastro::operadoras.apagados";
     protected $route = "operadoras";
 
-    protected $destinatario = 'manzoli2122@gmail.com' ;
-    protected $enviador = 'manzoli.elisandra@gmail.com' ;
-    protected $nome_enviador = 'Salao Espaco Vip' ;
+    //protected $destinatario = 'manzoli2122@gmail.com' ;
+    //protected $enviador = 'manzoli.elisandra@gmail.com' ;
+    //protected $nome_enviador = 'Salao Espaco Vip' ;
 
 
 
@@ -44,8 +44,6 @@ class OperadoraController extends SoftDeleteController
 
     // Log::write('cadastro', 'User sent out 3 voucher.')
 
-    protected function mail($model)
-    {
-        Mail::to($this->destinatario)->send(new OperadoraMail($model));
-    }
+   // protected function mail($model)
+   // {        Mail::to($this->destinatario)->send(new OperadoraMail($model));    }
 }
