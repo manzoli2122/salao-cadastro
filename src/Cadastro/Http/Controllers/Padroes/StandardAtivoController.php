@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Constants\ErrosSQL;
 use DataTables;
 use ChannelLog as Log;
-use Mail;
+//use Mail;
 
 class StandardAtivoController extends Controller
 {
@@ -17,9 +17,9 @@ class StandardAtivoController extends Controller
     protected $model;
     protected $logCannel = 'audit' ;
 
-    protected $destinatario = 'manzoli2122@gmail.com' ;
-    protected $enviador = 'manzoli.elisandra@gmail.com' ;
-    protected $nome_enviador = 'Salao Espaco Vip' ;
+   // protected $destinatario = 'manzoli2122@gmail.com' ;
+   // protected $enviador = 'manzoli.elisandra@gmail.com' ;
+   // protected $nome_enviador = 'Salao Espaco Vip' ;
 
 
     public function index()
@@ -28,15 +28,20 @@ class StandardAtivoController extends Controller
     }
 
 
-
-
     public function create()
     {
         return view("{$this->view}.create");
     }
 
+    
+/*
+    protected function mail($model)
+    {
+        return null ;
+    }
 
-
+*/
+  
   
     public function store(Request $request)
     {
@@ -45,17 +50,9 @@ class StandardAtivoController extends Controller
         $insert = $this->model->create($dataForm);           
         if($insert){
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
-            try {            
-                Mail::raw( $msg , function($message){                
-                    $message->from( $this->enviador , $this->nome_enviador);
-                    $message->to( $this->destinatario )->subject('Cadastro de ' .  $this->name );
-                });
-                Log::write( $this->logCannel , $msg  ); 
-            } 
-            catch(Swift_TransportException $e) 
-            { 
-                Log::write( $this->logCannel , "Não foi possivel o envio de email" );
-            }
+            
+            Log::write( $this->logCannel , $msg  );                      
+            //$this->mail($insert);
        
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
@@ -78,16 +75,14 @@ class StandardAtivoController extends Controller
     }
 
 
-
-
-
-
-
-
     public function edit($id)
     {
         $model = $this->model->ativo()->find($id);
-        return view("{$this->view}.edit", compact('model'));
+        if($model){
+            return view("{$this->view}.edit", compact('model'));
+        }
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+
     }
 
 
@@ -97,7 +92,10 @@ class StandardAtivoController extends Controller
     {
         $this->validate($request , $this->model->rules($id));        
         $dataForm = $request->all();                      
-        $model = $this->model->ativo()->find($id);        
+        $model = $this->model->ativo()->find($id);  
+        if(!$model){
+            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        }       
         $update = $model->update($dataForm);                
         if($update){
             $msg =  "UPDATEs- " . $this->name . ' alterado(a) com sucesso !! ' . $update . ' responsavel: ' . session('users') ;
@@ -124,10 +122,10 @@ class StandardAtivoController extends Controller
             $msg2 =  "DELETEs - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg2  );            
             //$msg = "Atendimento criado por " . session('users');
-            Mail::raw( $msg2 , function($message){                
-                $message->from( $this->enviador , $this->nome_enviador );
-                $message->to($this->destinatario)->subject('Cadastro de ' .  $this->name );
-            });
+            //Mail::raw( $msg2 , function($message){                
+           //     $message->from( $this->enviador , $this->nome_enviador );
+           //     $message->to($this->destinatario)->subject('Cadastro de ' .  $this->name );
+           // });
         } 
         catch(\Illuminate\Database\QueryException $e) 
         {
@@ -197,8 +195,12 @@ class StandardAtivoController extends Controller
     {
         try {
             $model = $this->model->inativo()->find($id);
+            
             $delete = $model->delete();       
             $msg = __('msg.sucesso_excluido', ['1' =>  $this->name  ]);
+
+            $msg2 =  "DELETEs PERMANENTE - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg2  );  
             
         } catch(\Illuminate\Database\QueryException $e) {
             $erro = true;
@@ -218,6 +220,9 @@ class StandardAtivoController extends Controller
     public function restore($id)
     {
         $model = $this->model->inativo()->find($id);
+        if(!$model){
+            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        }  
         $model->ativo = true ; 
         $restore = $model->save();
 

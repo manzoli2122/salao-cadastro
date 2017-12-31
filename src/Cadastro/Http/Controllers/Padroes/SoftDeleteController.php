@@ -5,8 +5,8 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Constants\ErrosSQL;
 use ChannelLog as Log;
-use Mail;
-use Exception;
+//use Mail;
+//use Exception;
 
 class SoftDeleteController extends Controller
 {
@@ -19,9 +19,9 @@ class SoftDeleteController extends Controller
     protected $logCannel = 'audit' ;
 
 
-    protected $destinatario = 'manzoli2122@gmail.com' ;
-    protected $enviador = 'manzoli.elisandra@gmail.com' ;
-    protected $nome_enviador = 'Salao Espaco Vip' ;
+    //protected $destinatario = 'manzoli2122@gmail.com' ;
+    //protected $enviador = 'manzoli.elisandra@gmail.com' ;
+    //protected $nome_enviador = 'Salao Espaco Vip' ;
 
 
 
@@ -30,23 +30,19 @@ class SoftDeleteController extends Controller
         return view("{$this->view}.index");
     }
 
-    
-    
-
-
 
     public function create()
     {
         return view("{$this->view}.create");
     }
 
-
+/*
     protected function mail($model)
     {
         return null ;
     }
 
-
+*/
   
     public function store(Request $request)
     {
@@ -56,7 +52,7 @@ class SoftDeleteController extends Controller
         if($insert){            
             $msg =  "CREATEs - " . $this->name . ' Cadastrado(a) com sucesso !! ' . $insert . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg  );                      
-            $this->mail($insert);           
+            //$this->mail($insert);           
             return redirect()->route("{$this->route}.index")->with('success', __('msg.sucesso_adicionado', ['1' => $this->name ]));
         }
         else {
@@ -65,39 +61,35 @@ class SoftDeleteController extends Controller
     }
 
 
-
-
     public function show($id)
     {
         $model = $this->model->find($id);
         if($model){
             return view("{$this->view}.show", compact('model'));
         }
-        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
     }
-
-
-
-
-
-
 
 
     public function edit($id)
     {
         $model = $this->model->find($id);
-        return view("{$this->view}.edit", compact('model'));
+        if($model){
+            return view("{$this->view}.edit", compact('model'));
+        }
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
     }
-
-
 
 
     public function update( Request $request, $id)
     {
         $this->validate($request , $this->model->rules($id));        
         $dataForm = $request->all();                      
-        $model = $this->model->find($id);        
-        $update = $model->update($dataForm);         
+        $model = $this->model->find($id); 
+        if(!$model){
+            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        }       
+        $update = $model->update($dataForm);     
         
         if($update){
             $msg =  "UPDATEs- " . $this->name . ' alterado(a) com sucesso !! ' . $update . ' responsavel: ' . session('users') ;
@@ -111,14 +103,6 @@ class SoftDeleteController extends Controller
     }
 
 
-
-
-    
-
-
-
-
-
     public function destroySoft($id)
     {
         try {            
@@ -128,11 +112,7 @@ class SoftDeleteController extends Controller
             
             $msg2 =  "DELETEs - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
             Log::write( $this->logCannel , $msg2  );            
-            //$msg = "Atendimento criado por " . session('users');
-            Mail::raw( $msg2 , function($message){                
-                $message->from( $this->enviador , $this->nome_enviador );
-                $message->to($this->destinatario)->subject('Cadastro de ' .  $this->name );
-            });
+            
         } 
         catch(\Illuminate\Database\QueryException $e) 
         {
@@ -201,6 +181,9 @@ class SoftDeleteController extends Controller
     public function restore($id)
     {
         $model = $this->model->withTrashed()->find($id);
+        if(!$model){
+            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        }   
         $restore = $model->restore();
         if($restore){
             $msg =  "RESTOREs- " . $this->name . ' restaurado(a) com sucesso !! ' . $restore . ' responsavel: ' . session('users') ;
@@ -247,6 +230,10 @@ class SoftDeleteController extends Controller
             $model = $this->model->withTrashed()->find($id);  
             $delete = $model->forceDelete();        
             $msg = __('msg.sucesso_excluido', ['1' =>  $this->name ]);
+
+            $msg2 =  "DELETEs PERMANENTE - " . $this->name . ' apagado(a) com sucesso !! ' . $model . ' responsavel: ' . session('users') ;
+            Log::write( $this->logCannel , $msg2  );  
+
         } catch(\Illuminate\Database\QueryException $e) {
             $erro = true;
             $msg = $e->errorInfo[1] == ErrosSQL::DELETE_OR_UPDATE_A_PARENT_ROW ? 
