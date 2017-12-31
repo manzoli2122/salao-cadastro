@@ -87,7 +87,7 @@ class SoftDeleteController extends Controller
         $dataForm = $request->all();                      
         $model = $this->model->find($id); 
         if(!$model){
-            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
         }       
         $update = $model->update($dataForm);     
         
@@ -171,7 +171,7 @@ class SoftDeleteController extends Controller
         if($model){
             return view("{$this->view_apagados}.show", compact('model'));
         }
-        return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
     }
 
 
@@ -182,7 +182,7 @@ class SoftDeleteController extends Controller
     {
         $model = $this->model->withTrashed()->find($id);
         if(!$model){
-            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
         }   
         $restore = $model->restore();
         if($restore){

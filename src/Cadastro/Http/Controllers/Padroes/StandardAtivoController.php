@@ -70,7 +70,7 @@ class StandardAtivoController extends Controller
         if($model){
             return view("{$this->view}.show", compact('model'));
         }
-        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
 
     }
 
@@ -81,7 +81,7 @@ class StandardAtivoController extends Controller
         if($model){
             return view("{$this->view}.edit", compact('model'));
         }
-        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
 
     }
 
@@ -94,7 +94,7 @@ class StandardAtivoController extends Controller
         $dataForm = $request->all();                      
         $model = $this->model->ativo()->find($id);  
         if(!$model){
-            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+            return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
         }       
         $update = $model->update($dataForm);                
         if($update){
@@ -184,7 +184,7 @@ class StandardAtivoController extends Controller
         if($model){
             return view("{$this->view_apagados}.show", compact('model'));
         }
-        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+        return redirect()->route("{$this->route}.index")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
 
        
     }
@@ -221,7 +221,7 @@ class StandardAtivoController extends Controller
     {
         $model = $this->model->inativo()->find($id);
         if(!$model){
-            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);;
+            return redirect()->route("{$this->route}.apagados")->withErrors(['message' => __('msg.erro_nao_encontrado', ['1' => $this->name ])]);
         }  
         $model->ativo = true ; 
         $restore = $model->save();
