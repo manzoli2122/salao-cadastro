@@ -4,16 +4,11 @@
 	Listagem dos Operadoras			
 @endsection
 
-
-
 @section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
 	@permissao('operadoras-apagados')
 		<li><a href="{{  route('operadoras.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Operadoras Apagadas</span></a></li>
 	@endpermissao
 @endsection
-
-
-		
 
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
@@ -26,7 +21,6 @@
 				</a>			           
         	</div>
 		@endpermissao 
-
         <div class="box-body">
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
@@ -36,8 +30,7 @@
 						<th>Porc. Credito</th>
 						<th>Porc. Credito Parc.</th>
 						<th>Porc. Debito</th>
-						<th>Máximo de Parcelas</th>					
-						
+						<th>Máximo de Parcelas</th>							
                         <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
@@ -48,10 +41,8 @@
 
 @endsection
 
-
 @push(Config::get('app.templateMasterScript' , 'script') )
 	<script src="{{ mix('js/datatables-padrao.js') }}" type="text/javascript"></script>
-
 	<script>
 		$(document).ready(function() {
 			var dataTable = datatablePadrao('#datatable', {
@@ -83,5 +74,3 @@
 		});
 	</script>
 @endpush
-
-

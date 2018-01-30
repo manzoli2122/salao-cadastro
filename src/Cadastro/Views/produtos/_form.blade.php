@@ -14,7 +14,6 @@
                 {!! $errors->first('valor', '<p class="help-block">:message</p>') !!}
             </div>               
         </div>
-
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('desconto_maximo') ? 'has-error' : ''}}">
                 <label for="desconto_maximo">Desconto máximo (%)</label>
@@ -30,8 +29,6 @@
                     value="{{$model->observacoes or old('observacoes')}}">
                 {!! $errors->first('observacoes', '<p class="help-block">:message</p>') !!}
             </div>
-        </div>
-                     
+        </div>                    
     </div> 
- </div>  
-    
+ </div>      

@@ -18,12 +18,9 @@
                 <input type="number"  class="form-control" name="porcentagem_funcionario" placeholder="porcentagem funcionario"
                     value="{{$model->porcentagem_funcionario or old('porcentagem_funcionario')}}">
                 {!! $errors->first('porcentagem_funcionario', '<p class="help-block">:message</p>') !!}
-            </div>      
-
+            </div>    
         </div>
-
         <div class="col-md-6">
-
             <div class="form-group {{ $errors->has('categoria') ? 'has-error' : ''}}">
                 <label for="categoria">Categoria</label>
                  <select class="form-control" name="categoria"  required>
@@ -40,21 +37,18 @@
                 </select> 
                 {!! $errors->first('categoria', '<p class="help-block">:message</p>') !!}
             </div> 
-
             <div class="form-group {{ $errors->has('duracao_aproximada') ? 'has-error' : ''}}">
                 <label for="duracao_aproximada">Duração aproximada (min)</label>
                 <input type="number"  class="form-control" name="duracao_aproximada" placeholder="duração aproximada (min)"
                     value="{{$model->duracao_aproximada or old('duracao_aproximada')}}">
                 {!! $errors->first('duracao_aproximada', '<p class="help-block">:message</p>') !!}
             </div> 
-
             <div class="form-group {{ $errors->has('desconto_maximo') ? 'has-error' : ''}}">
                 <label for="desconto_maximo">Desconto máximo(%)</label>
                 <input type="number" min="0" max="100" class="form-control" name="desconto_maximo" placeholder="desconto máximo(%)"
                     value="{{$model->desconto_maximo or old('desconto_maximo')}}">
                 {!! $errors->first('desconto_maximo', '<p class="help-block">:message</p>') !!}
-            </div> 
-             
+            </div>              
         </div> 
         <div class="col-md-12">
             <div class="form-group {{ $errors->has('observacoes') ? 'has-error' : ''}}">
@@ -63,8 +57,6 @@
                     value="{{$model->observacoes or old('observacoes')}}">
                 {!! $errors->first('observacoes', '<p class="help-block">:message</p>') !!}
             </div>
-        </div>
-                     
+        </div>                     
     </div> 
- </div>  
-    
+ </div>      

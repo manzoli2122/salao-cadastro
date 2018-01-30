@@ -4,13 +4,11 @@
 	Listagem dos Produtos			
 @endsection
 
-
 @section( Config::get('app.templateMasterMenuLateral' , 'menuLateral')  )				
 	@permissao('produtos-apagados')
 		<li><a href="{{  route('produtos.apagados')}}"><i class="fa fa-circle-o text-red"></i> <span>Produtos Apagados</span></a></li>
 	@endpermissao
 @endsection
-
 
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
@@ -23,7 +21,6 @@
 				</a>			            
         	</div>
 		@endpermissao
-
         <div class="box-body">
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
@@ -43,10 +40,8 @@
 
 @endsection
 
-
 @push(Config::get('app.templateMasterScript' , 'script') )
 	<script src="{{ mix('js/datatables-padrao.js') }}" type="text/javascript"></script>
-
 	<script>
 		$(document).ready(function() {
 			var dataTable = datatablePadrao('#datatable', {
@@ -76,5 +71,3 @@
 		});
 	</script>
 @endpush
-
-
