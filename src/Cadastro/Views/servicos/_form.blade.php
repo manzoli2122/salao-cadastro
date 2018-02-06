@@ -22,8 +22,8 @@
         </div>
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('categoria') ? 'has-error' : ''}}">
-                <label for="categoria">Categoria</label>
-                 <select class="form-control" name="categoria"  required>
+                <label  for="categoria">Categoria</label>
+                 <select id="categoria" class="form-control" name="categoria"  required>
                     <option value="">Selecione a Categoria</option>
                     <option value="Cabelo" {{$model->categoria == 'Cabelo' ? 'selected' : ''  }}>  Cabelo  </option>
                     <option value="Depilação" {{$model->categoria == 'Depilação' ? 'selected' : ''  }}>  Depilação  </option>
