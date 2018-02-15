@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" name="nome" placeholder="Nome da Operadora de cartão"
+                <input type="text" class="form-control" name="nome" placeholder="Nome do Produto"
                     value="{{$model->nome or old('nome')}}"  {{$model->id ? 'readonly' : '' }}>
                 {!! $errors->first('nome', '<p class="help-block">:message</p>') !!}
             </div>
