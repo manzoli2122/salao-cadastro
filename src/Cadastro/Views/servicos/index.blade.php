@@ -45,13 +45,13 @@
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
                     <tr>
-						<th  style="max-width:30px">ID</th>
+						<th  style="max-width:20px">ID</th>
 						<th pesquisavel>Nome</th>
 						<th>Valor</th>						
-						<th style="max-width:80px">Duração Aproximada</th>										
-						<th style="max-width:80px">Porcentagem Funcionário</th>
+						<th style="max-width:80px">Duração</th>										
+						<th style="max-width:80px">Porc. Func.</th>
 						<th>Categoria</th>
-						<th style="max-width:70px">Desconto Máximo</th>												
+						<th style="max-width:70px">Desconto Máx.</th>												
                         <th class="align-center" style="width:100px">Ações</th>
                     </tr>
                 </thead>
@@ -80,7 +80,7 @@
 					{ data: 'duracao_aproximada', name: 'duracao_aproximada' },					
 					{ data: 'porcentagem_funcionario', name: 'porcentagem_funcionario' },
 					{ data: 'categoria', name: 'categoria' },
-					{ data: 'desconto_maximo', name: 'desconto_maximo' },
+					{ data: 'desconto_maximo', name: 'desconto_maximo' ,  visible: false },
 					{ data: 'action', name: 'action', orderable: false, searchable: false, class: 'align-center'}
 				],
 			});
