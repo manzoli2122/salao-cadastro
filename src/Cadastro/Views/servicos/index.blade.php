@@ -28,7 +28,7 @@
 			font-size: 15px;		
 		} 
 		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-			padding: 4.8px;
+			padding: 5.5px;
 		}
 		/*
 		label {			
@@ -53,7 +53,7 @@
 						<th>Porc. Func.</th>
 						<th>Categoria</th>
 						<th style="max-width:70px">Desconto Máx.</th>												
-                        <th class="align-center" style="width:100px">Ações</th>
+                        <th class="align-center" style="width:120px">Ações</th>
                     </tr>
                 </thead>
             </table>
