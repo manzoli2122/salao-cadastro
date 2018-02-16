@@ -26,10 +26,11 @@
 		.btn-group-sm>.btn, .btn-sm {
 			padding: 1px 10px;
 			font-size: 15px;		
-		} /*
+		} 
 		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 			padding: 4.8px;
 		}
+		/*
 		label {			
 			 margin-bottom: 1px; 
 		}*/
@@ -41,15 +42,15 @@
 
 <div class="col-xs-12">
     <div class="box box-success">	 
-        <div class="box-body">
+        <div class="box-body" style="padding-top: 5px; padding-bottom: 3px;">
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
                     <tr>
 						<th  style="max-width:20px">ID</th>
 						<th pesquisavel>Nome</th>
 						<th>Valor</th>						
-						<th style="max-width:80px">Duração</th>										
-						<th style="max-width:80px">Porc. Func.</th>
+						<th>Duração</th>										
+						<th>Porc. Func.</th>
 						<th>Categoria</th>
 						<th style="max-width:70px">Desconto Máx.</th>												
                         <th class="align-center" style="width:100px">Ações</th>
