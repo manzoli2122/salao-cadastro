@@ -12,18 +12,35 @@
 @endsection
 
 
+@section( Config::get('app.templateMasterContentTituloSmallRigth' , 'small-content-header-right')  )
+	@permissao('servicos-cadastrar')			
+		<a href="{{ route('servicos.create')}}" class="btn btn-success btn-sm" title="Adicionar um novo Serviço">
+			<i class="fa fa-plus"></i> Cadastrar Serviço
+		</a> 
+	@endpermissao			
+@endsection
+
+
+@push( Config::get('app.templateMasterCss' , 'css')  )			
+	<style type="text/css">
+		.btn-group-sm>.btn, .btn-sm {
+			padding: 1px 10px;
+			font-size: 15px;		
+		} /*
+		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+			padding: 4.8px;
+		}
+		label {			
+			 margin-bottom: 1px; 
+		}*/
+	</style>
+@endpush
+
+
 @section( Config::get('app.templateMasterContent' , 'content')  )
 
 <div class="col-xs-12">
-    <div class="box box-success">
-		@permissao('servicos-cadastrar')
-        	<div class="box-header align-right">			
-				<a href="{{ route('servicos.create')}}" class="btn btn-success" title="Adicionar um novo Serviço">
-					<i class="fa fa-plus"></i> Cadastrar Serviço
-				</a>          
-        	</div>
-		@endpermissao  
-
+    <div class="box box-success">	 
         <div class="box-body">
             <table class="table table-bordered table-striped table-hover" id="datatable">
                 <thead>
