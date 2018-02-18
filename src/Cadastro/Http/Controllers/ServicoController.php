@@ -4,6 +4,7 @@ namespace Manzoli2122\Salao\Cadastro\Http\Controllers;
 
 use Manzoli2122\Salao\Cadastro\Models\Servico;
 use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\StandardAtivoController ;
+use DataTables;
 
 class ServicoController extends StandardAtivoController
 {    
