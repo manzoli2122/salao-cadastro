@@ -20,7 +20,6 @@
 	@endpermissao			
 @endsection
 
-
 @push( Config::get('app.templateMasterCss' , 'css')  )			
 	<style type="text/css">
 		.btn-group-sm>.btn, .btn-sm {
@@ -30,10 +29,6 @@
 		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 			padding: 5.5px;
 		}
-		/*
-		label {			
-			 margin-bottom: 1px; 
-		}*/
 	</style>
 @endpush
 
